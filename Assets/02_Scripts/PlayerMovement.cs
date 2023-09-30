@@ -4,19 +4,31 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float movSpeed;
-    float speedX, speedY;
-    Rigidbody2D rb;
+    // https://www.youtube.com/watch?v=3Uc3cscnYns&t=53s&ab_channel=MoreBBlakeyyy
+    // movement tutorial
 
-    void Start()
-    {
+    private Rigidbody2D rb;
+    float vertical;
+    float horizontal;
+
+    public float moveSpeed;
+    public float speedLimit = 0.7f;
+
+    void Start() {
         rb = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
-    {
-        speedX = Input.GetAxisRaw("Horizontal") * movSpeed;
-        speedY = Input.GetAxisRaw("Vertical") * movSpeed;
-        rb.velocity = new Vector2(speedX, speedY);
+    void Update() {
+        horizontal = Input.GetAxisRaw("Horizontal");
+        vertical = Input.GetAxisRaw("Vertical");
+    }
+
+    void FixedUpdate() {
+        if(horizontal != 0 && vertical != 0) {
+            horizontal *= speedLimit;
+            vertical *= speedLimit;
+        }
+
+        rb.velocity = new Vector2(horizontal * moveSpeed, vertical * moveSpeed);
     }
 }

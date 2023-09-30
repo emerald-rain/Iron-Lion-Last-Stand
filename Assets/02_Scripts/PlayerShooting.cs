@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shooting : MonoBehaviour
+public class PlayerShooting : MonoBehaviour
 {
     // https://youtu.be/-bkmPm_Besk?si=mg8sesMm4krQZtBw
     // thank you for shooting system tutorial

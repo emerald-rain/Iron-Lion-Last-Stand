@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : NetworkBehaviour
 {
     // https://www.youtube.com/watch?v=3Uc3cscnYns&t=53s&ab_channel=MoreBBlakeyyy
     // movement tutorial
@@ -19,6 +20,8 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void Update() {
+        if (!isLocalPlayer) return;
+
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
     }

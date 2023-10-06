@@ -4,16 +4,22 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-    // ttps://www.youtube.com/watch?v=TYefpMf0cJ8&ab_channel=MoreBBlakeyyy
-    // thank you very much for this camera movement tutorial
+    private Transform player;
 
-    public Transform player;
     public Vector3 offset;
     public float speed;
 
-    void FixedUpdate() // made it FixedUpdate for better smoothness on high values
+    void FixedUpdate()
     {
-        Vector3 desiredPos = player.position + offset;
-        transform.position = Vector3.Lerp(transform.position, desiredPos, speed * Time.deltaTime);
+        if (player != null)
+        {
+            Vector3 desiredPos = player.position + offset;
+            transform.position = Vector3.Lerp(transform.position, desiredPos, speed * Time.deltaTime);
+        }
+    }
+
+    public void SetPlayer(Transform newPlayer)
+    {
+        player = newPlayer;
     }
 }

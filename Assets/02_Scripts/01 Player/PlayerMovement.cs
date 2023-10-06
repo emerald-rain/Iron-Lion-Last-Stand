@@ -17,6 +17,14 @@ public class PlayerMovement : NetworkBehaviour
 
     void Start() {
         rb = GetComponent<Rigidbody2D>();
+
+        if (isLocalPlayer) {
+            CameraMovement cameraMovement = Camera.main.GetComponent<CameraMovement>();
+
+            if (cameraMovement != null) {
+                cameraMovement.SetPlayer(transform);
+            }
+        }
     }
 
     void Update() {

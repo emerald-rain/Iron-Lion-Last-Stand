@@ -708,7 +708,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02cc9e3c98c70f44c807debc7ba02c53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   offset: {x: 0, y: 0, z: -100}
   speed: 1
 --- !u!1 &1262666740
@@ -1001,9 +1000,9 @@ MonoBehaviour:
   autoConnectClientBuild: 0
   sendRate: 30
   offlineScene: 
-  onlineScene: 
+  onlineScene: Assets/03_Scenes/ShootingPolygon.unity
   transport: {fileID: 1611411619}
-  networkAddress: localhost
+  networkAddress: 883b71089795435e84dc77d23bf2c3bf-eu-west-free.games.playflow.cloud
   maxConnections: 100
   disconnectInactiveConnections: 0
   disconnectInactiveTimeout: 60

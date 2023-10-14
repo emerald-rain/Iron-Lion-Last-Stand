@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+using Unity.Netcode; // for owned obj movement
+
+public class PlayerMovement : NetworkBehaviour
 {
     // https://www.youtube.com/watch?v=3Uc3cscnYns&t=53s&ab_channel=MoreBBlakeyyy
     // movement tutorial
@@ -19,6 +21,8 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void Update() {
+        if (!IsOwner) return;
+
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
     }

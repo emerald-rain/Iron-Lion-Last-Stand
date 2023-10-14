@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
 public class PlayerShooting : MonoBehaviour
 {
@@ -18,21 +19,18 @@ public class PlayerShooting : MonoBehaviour
     private float timer;
     public float timeBetweenFiring;  
 
-    void Start()
-    {
+    void Start() {
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
     }
 
-    void Update()
-    {
+    void Update() {
         mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
         Vector3 rotation = mousePos - transform.position;
 
         float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, rotZ);
 
-        if (!canFire)
-        {
+        if (!canFire) {
             timer += Time.deltaTime;
             if(timer > timeBetweenFiring)
             {
@@ -41,10 +39,15 @@ public class PlayerShooting : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButton(0) && canFire)
-        {
+        if (Input.GetMouseButton(0) && canFire) {
             canFire = false;
-            Instantiate(bullet, bulletTransform.position, Quaternion.identity);
+
+            // Instantiate a bullet at the bulletTransform position with no rotation.
+            GameObject spawnedBulletObject = Instantiate(bullet, bulletTransform.position, Quaternion.identity);
+            // Get the Transform component of the spawned bullet object.
+            Transform spawnedBulletTransform = spawnedBulletObject.transform;
+            // Call the Spawn method of NetworkObject on the spawned bullet with true as a parameter.
+            spawnedBulletTransform.GetComponent<NetworkObject>().Spawn(true);
         }
     }
 }

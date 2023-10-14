@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Mirror;
+
+using Unity.Netcode; // for owned obj movement
 
 public class PlayerMovement : NetworkBehaviour
 {
@@ -17,18 +18,10 @@ public class PlayerMovement : NetworkBehaviour
 
     void Start() {
         rb = GetComponent<Rigidbody2D>();
-
-        if (isLocalPlayer) {
-            CameraMovement cameraMovement = Camera.main.GetComponent<CameraMovement>();
-
-            if (cameraMovement != null) {
-                cameraMovement.SetPlayer(transform);
-            }
-        }
     }
 
     void Update() {
-        if (!isLocalPlayer) return;
+        if (!IsOwner) return;
 
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");

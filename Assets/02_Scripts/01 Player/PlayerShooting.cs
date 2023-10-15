@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 
-public class PlayerShooting : MonoBehaviour
+public class PlayerShooting : NetworkBehaviour
 {
     private Camera mainCam;
     private Vector3 mousePos;
@@ -23,6 +23,8 @@ public class PlayerShooting : MonoBehaviour
 
     void Update()
     {
+        if (!IsOwner) return;
+
         // Get the mouse position in the game world
         mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
         Vector3 rotation = mousePos - transform.position;
@@ -46,25 +48,23 @@ public class PlayerShooting : MonoBehaviour
         if (Input.GetMouseButton(0) && canFire)
         {
             canFire = false;  // Player fired
+            ShotServerRpc();
+        }
+    }
 
+    [ServerRpc(RequireOwnership = false)]
+    private void ShotServerRpc()
+    {
             GameObject spawnedBulletObject = Instantiate(bullet, bulletTransform.position, Quaternion.identity);
             Transform spawnedBulletTransform = spawnedBulletObject.transform;
 
             // Spawn the bullet over the network
             spawnedBulletTransform.GetComponent<NetworkObject>().Spawn(true);
-            SendMessageToServer("BulletSpawned");
-        }
     }
 
-    [ServerRpc]
-    private void SendMessageToServer(string message) 
-    {
-        Debug.Log("SendMessageToServer");
-    }
-
-    [ClientRpc]
-    private void SendMessageToClient(string message) {
-    // Handle the message (e.g., display it on the client)
-    Debug.Log("Received confirmation on the client: " + message);
-}
+    // [ClientRpc]
+    // private void SendMessageToClient(string message) {
+    // // Handle the message (e.g., display it on the client)
+    // Debug.Log("Received confirmation on the client: " + message);
+    // }
 }

@@ -20,8 +20,7 @@ public class PlayerMovement : NetworkBehaviour
     void Update()
     {
         // Only process movement for the owner of this object
-        if (!IsOwner)
-            return;
+        if (!IsOwner) return;
 
         // Handle the movement for the server authoritative player
         HandleMovementServerAuth();
@@ -52,5 +51,5 @@ public class PlayerMovement : NetworkBehaviour
 
         // Set the velocity of the rigidbody for movement
         rb.velocity = new Vector2(horizontal * moveSpeed, vertical * moveSpeed);
-    } 
+    }
 }

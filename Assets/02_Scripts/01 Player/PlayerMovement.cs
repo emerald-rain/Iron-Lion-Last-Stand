@@ -5,16 +5,18 @@ using Unity.Netcode;
 
 public class PlayerMovement : NetworkBehaviour
 {
-    private Rigidbody2D rb;
-    private float vertical;
-    private float horizontal;
+    private Rigidbody2D rb;  // Rigidbody component for 2D physics
+    private float vertical;   // Vertical movement input
+    private float horizontal; // Horizontal movement input
+    private CameraMovement mainCamera; // Reference to the CameraMovement script
 
-    [SerializeField] private float moveSpeed;
-    [SerializeField] private float speedLimit = 0.7f;
+    [SerializeField] private float moveSpeed; // Movement speed for the player
+    [SerializeField] private float speedLimit = 0.7f; // Speed limit for diagonal movement
 
-    void Start()
+    void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();  // Get the Rigidbody2D component attached to the same GameObject
+        mainCamera = Camera.main.GetComponent<CameraMovement>();  // Get the CameraMovement component from the main camera
     }
 
     void Update()
@@ -24,6 +26,12 @@ public class PlayerMovement : NetworkBehaviour
 
         // Handle the movement for the server authoritative player
         HandleMovementServerAuth();
+    }
+
+    void FixedUpdate()
+    {
+        // Set the player's transform for the camera (executed in FixedUpdate for physics-related updates)
+        mainCamera.SetPlayer(transform);
     }
 
     private void HandleMovementServerAuth()

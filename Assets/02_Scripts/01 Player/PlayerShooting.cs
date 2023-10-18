@@ -55,16 +55,10 @@ public class PlayerShooting : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     private void ShotServerRpc()
     {
-            GameObject spawnedBulletObject = Instantiate(bullet, bulletTransform.position, Quaternion.identity);
+            GameObject spawnedBulletObject = Instantiate(bullet, transform.position, Quaternion.identity);
             Transform spawnedBulletTransform = spawnedBulletObject.transform;
 
             // Spawn the bullet over the network
             spawnedBulletTransform.GetComponent<NetworkObject>().Spawn(true);
     }
-
-    // [ClientRpc]
-    // private void SendMessageToClient(string message) {
-    // // Handle the message (e.g., display it on the client)
-    // Debug.Log("Received confirmation on the client: " + message);
-    // }
 }

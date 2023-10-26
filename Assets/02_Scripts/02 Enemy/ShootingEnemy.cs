@@ -4,32 +4,21 @@ using UnityEngine;
 
 public class ShootingEnemy : MonoBehaviour
 {
-    // https://www.youtube.com/watch?v=dmQyfWxUNPw&t=98s
-
-    public float speed;
-    public Transform target;
-    public float minimumDistance;
-
-    public GameObject projectile;
-    public float timeBetweenShots;
-    public float nextShotTime;
-
+    [SerializeField] private Transform target;  // Reference to the player's Transform (target)
+    [SerializeField] private GameObject projectile;  // Projectile to be instantiated
+    [SerializeField] private float timeBetweenShots;  // Time interval between shots
+    
+    private float nextShotTime;  // Next time when the enemy can shoot
 
     private void Update()
     {
-        if (Time.time > nextShotTime)
+        if (Time.time > nextShotTime) // Check if it's time to shoot
         {
+            // Instantiate a projectile at the enemy's position
             Instantiate(projectile, transform.position, Quaternion.identity);
-            nextShotTime = Time.time + timeBetweenShots;
-        }
 
-        if (Vector2.Distance(transform.position, target.position) < minimumDistance)
-        {
-            transform.position = Vector2.MoveTowards(transform.position, target.position, -speed * Time.deltaTime);
-        }
-        else
-        {
-            // ATTACK FUNC
+            // Update the next shot time
+            nextShotTime = Time.time + timeBetweenShots;
         }
     }
 }

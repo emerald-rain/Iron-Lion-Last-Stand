@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-    // ttps://www.youtube.com/watch?v=TYefpMf0cJ8&ab_channel=MoreBBlakeyyy
-    // thank you very much for this camera movement tutorial
+    public Transform player;  // Reference to the player's Transform
+    public Vector3 offset;  // Offset for camera position relative to the player
+    public float speed; // Speed of camera movement
 
-    public Transform player;
-    public Vector3 offset;
-    public float speed;
-
-    void FixedUpdate() // made it FixedUpdate for better smoothness on high values
+    void FixedUpdate()
     {
+        // Calculate the desired camera position
         Vector3 desiredPos = player.position + offset;
-        transform.position = Vector3.Lerp(transform.position, desiredPos, speed * Time.deltaTime);
+        
+        // Smoothly move the camera to the desired position
+        transform.position = Vector3.Lerp(transform.position, desiredPos, speed * Time.fixedDeltaTime);
     }
 }

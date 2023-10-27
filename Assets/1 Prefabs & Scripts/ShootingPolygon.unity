@@ -1410,7 +1410,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4845276930943762971, guid: 2da3dcc22749e7f4280737786d898334, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000045776367
+      value: -0.000045776367
       objectReference: {fileID: 0}
     - target: {fileID: 4845573536482310341, guid: 2da3dcc22749e7f4280737786d898334, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1656,6 +1656,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2547647270847959949, guid: d957cc0fc9b321643878fe7c8323090d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2031565354}
+    - targetCorrespondingSourceObject: {fileID: 2547647270847959949, guid: d957cc0fc9b321643878fe7c8323090d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2031565357}
   m_SourcePrefab: {fileID: 100100000, guid: d957cc0fc9b321643878fe7c8323090d, type: 3}
 --- !u!1 &2031565350 stripped
 GameObject:
@@ -1694,6 +1697,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &2031565357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2031565350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03b640c0890a1ed41a10b8f3223c2462, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabToSpawn: {fileID: 344445916090762764, guid: 12039f41b7fa8d14994e00233e5e851f, type: 3}
+  minDistance: 10
+  maxDistance: 20
 --- !u!1001 &1191668103857946018
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1818,6 +1836,18 @@ PrefabInstance:
     - target: {fileID: 572911205230212566, guid: 9c3228382435d764393bc520dc93a945, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 659638037828264625, guid: 9c3228382435d764393bc520dc93a945, type: 3}
+      propertyPath: threadCount
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 659638037828264625, guid: 9c3228382435d764393bc520dc93a945, type: 3}
+      propertyPath: maxFrameTime
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 659638037828264625, guid: 9c3228382435d764393bc520dc93a945, type: 3}
+      propertyPath: data.dataString
+      value: UEsDBBQAAAgIAAAQIex93L00bQIAACkFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVE1zmzAQ/SsenesMGDc2vbXYcXpI4onbyYWLDIvRWEiMJGI7Gf/3roQwhHJBvP16b3fFJ2FC15AZqTaK5U8yB/JjQuyZfJv0xkc404MUO/YBnc8by01pnajzeaWGScRDG6ZlBUax7Kc4cOscINgIVkhVrfMDJFIbjXBBuQY0KWlstEDoc0LO+JrGNuSCp9nCnj7wFAeTKx4zEAZU7xrcxe65n898SBcQ3oXR/fJ+GS3X0zBywY3IOK1qyK2SPkc096Hh0rkJ1Og9rJ5Mcs60J0jMpXYNSGitG5SHDjmjKNixsiRKYIfS+I9b8EtRaDCen6KXFVPYtzYr+SXbZlZUH1te75Q3tk7LqE359J91GjpzoWT12FUNA1vBlCw7vtJLRrUZ9HoIr3raoWvOifIj3XN4K0E8y42SjcjRaFRjQxsNs1X/eROWlJAde7ylOgKbejCx0ZyshqvTfk44q/ZuqPMW2HHpuu32ARTO5TcSdtuifQpELYu/Gv7Qw3CtvOGBKW3Q5FUKS28vG2Vdydr1zKppTCKVAAd70jUIys1li2nMeIAj26DsyPJA7QXyxb2tuxejEAf3/kEwMm3l6TYsXcrTE+jypTGcCehJW8Mz9imRQrT7NexJF7ZrVEGzQdihYfnX1SJhvC/iRTSLg4zSeZxNo/0yiBazcBFFwXz+vSBu95hAnZRvW6K+PTi1YU8ELlr3Y5lsFK3dsueKnjbso5JDhkwUcpcpAPHyNYcGhWXwVubrnGGLdmAME27i5DMlXGZHyNObotRpXZ+NommfJSU1e5fGIilJ3K8kJRa+bfNWwTuDky3eJbuS6z9QSwMEFAAACAgAABAh7OQWlAFtAAAAeAAAAAkAJABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQGrVipLLSrOzM9TslIw0TPSMzTXUVBKL0osyCgGihiCOKWZKSB2tJKhZVKapbmxkaVBcmKiiWWyrnGShYGxuZGhubGxgYmJaZpSLFB9SWVBql9ibipET0BiSUZaZl5KZl66nntRZoo7yGil2FoAUEsBAi0AFAAACAgAABAh7H3cvTRtAgAAKQUAAAsAJAAAAAAAAAAAAAAAAAAAAGdyYXBoMC5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsBAi0AFAAACAgAABAh7OQWlAFtAAAAeAAAAAkAJAAAAAAAAAAAAAAAugIAAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLBQYAAAAAAgACALgAAAByAwAAAAA=
       objectReference: {fileID: 0}
     - target: {fileID: 2271963320194619390, guid: 9c3228382435d764393bc520dc93a945, type: 3}
       propertyPath: m_Name

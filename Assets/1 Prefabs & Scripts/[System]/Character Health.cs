@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class CharacterHealth : MonoBehaviour
 {
-    public Transform pfHealthBar; // Префаб полосы здоровья
-    public float maxWidth = 0.8f; // Максимальная ширина полосы
-    public float fixedHeight = 0.1f; // Фиксированная высота полосы
-    public int maxHealth = 100; // Максимальное здоровье
+    [SerializeField] private Transform pfHealthBar; // Префаб полосы здоровья
+
+    [SerializeField] private float maxWidth = 0.8f; // Максимальная ширина полосы
+    [SerializeField] private float fixedHeight = 0.1f; // Фиксированная высота полосы
+    [SerializeField] private Vector3 healthBarOffset = new Vector3(0f, 2f, 0f); // Оффсет полосы здоровья
+    [SerializeField] private int maxHealth = 100; // Максимальное здоровье
 
     public HealthSystem healthSystem; // Система здоровья
 
@@ -25,7 +27,10 @@ public class CharacterHealth : MonoBehaviour
 
     private void CreateHealthBar()
     {
-        Transform healthBarTransform = Instantiate(pfHealthBar, gameObject.transform.position + Vector3.up * 2, Quaternion.identity);
+        // Определите смещение по горизонтали и вертикали относительно персонажа
+        Vector3 offset = healthBarOffset;
+
+        Transform healthBarTransform = Instantiate(pfHealthBar, gameObject.transform.position + offset, Quaternion.identity);
         // Устанавливаем игрока в качестве родителя полосы здоровья
         healthBarTransform.parent = gameObject.transform;
     }

@@ -306,7 +306,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7036631684201179868, guid: c928fc035a56ba542b67f29260f71aa5, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 519653239}
+      addedObject: {fileID: 519653246}
   m_SourcePrefab: {fileID: 100100000, guid: c928fc035a56ba542b67f29260f71aa5, type: 3}
 --- !u!1 &308667323
 GameObject:
@@ -573,23 +573,33 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7036631684201179868, guid: c928fc035a56ba542b67f29260f71aa5, type: 3}
   m_PrefabInstance: {fileID: 278233978}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &519653239
-MonoBehaviour:
+--- !u!50 &519653246
+Rigidbody2D:
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519653238}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97d6215ff0c8f954ba1ecac8e77b2fc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pfHealthBar: {fileID: 4001194413639355407, guid: d7f6589184aa1a046b8826507ad24d50, type: 3}
-  maxWidth: 0.8
-  fixedHeight: 0.1
-  healthBarOffset: {x: 0, y: 1, z: 0}
-  maxHealth: 300
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &760461388
 GameObject:
   m_ObjectHideFlags: 0
@@ -1282,6 +1292,18 @@ PrefabInstance:
       propertyPath: _loggingLevel
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 4735113768296962263, guid: 2da3dcc22749e7f4280737786d898334, type: 3}
+      propertyPath: _focusOnActivate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4735113768296962263, guid: 2da3dcc22749e7f4280737786d898334, type: 3}
+      propertyPath: _activateOnStartup
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4735113768296962263, guid: 2da3dcc22749e7f4280737786d898334, type: 3}
+      propertyPath: _initialiseOnStartup
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4735202183287030787, guid: 2da3dcc22749e7f4280737786d898334, type: 3}
       propertyPath: m_Size
       value: 0.9411788
@@ -1492,7 +1514,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4845276930943762971, guid: 2da3dcc22749e7f4280737786d898334, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.000045776367
+      value: 0.000076293945
       objectReference: {fileID: 0}
     - target: {fileID: 4845573536482310341, guid: 2da3dcc22749e7f4280737786d898334, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1736,6 +1758,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8545137033836836494, guid: 439ae5427b8f0d94a9ccda665d062302, type: 3}
+      propertyPath: prefabToSpawn
+      value: 
+      objectReference: {fileID: 7036631684201179868, guid: c928fc035a56ba542b67f29260f71aa5, type: 3}
     m_RemovedComponents:
     - {fileID: 309720471879164072, guid: 439ae5427b8f0d94a9ccda665d062302, type: 3}
     m_RemovedGameObjects:
@@ -1837,8 +1863,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pfHealthBar: {fileID: 4001194413639355407, guid: d7f6589184aa1a046b8826507ad24d50, type: 3}
-  maxWidth: 0.8
-  fixedHeight: 0.1
   healthBarOffset: {x: 0, y: 1, z: 0}
   maxHealth: 100
 --- !u!1660057539 &9223372036854775807

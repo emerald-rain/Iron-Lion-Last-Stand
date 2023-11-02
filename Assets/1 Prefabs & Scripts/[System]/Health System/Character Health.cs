@@ -6,8 +6,8 @@ public class CharacterHealth : MonoBehaviour
 {
     [SerializeField] private Transform pfHealthBar; // Префаб полосы здоровья
 
-    [SerializeField] private float maxWidth = 0.8f; // Максимальная ширина полосы
-    [SerializeField] private float fixedHeight = 0.1f; // Фиксированная высота полосы
+    private float maxWidth = 0.8f; // Максимальная ширина полосы
+    private float fixedHeight = 0.1f; // Фиксированная высота полосы
     [SerializeField] private Vector3 healthBarOffset = new Vector3(0f, 1f, 0f); // Оффсет полосы здоровья
     [SerializeField] private int maxHealth = 100; // Максимальное здоровье
 
@@ -32,5 +32,13 @@ public class CharacterHealth : MonoBehaviour
         HealthBar healthBar = healthBarTransform.GetComponentInChildren<HealthBar>();
         // Настраиваем полосу здоровья
         healthBar.Setup(healthSystem, maxWidth, fixedHeight);
+    }
+
+    // Метод для обработки получения урона врагом
+    public void TakeDamage(int damage) {
+        healthSystem.Damage(damage);
+
+        // Проверяем, если здоровье врага опустилось до нуля или меньше, то уничтожаем врага
+        if (healthSystem.GetHealth() <= 0) Destroy(gameObject);
     }
 }

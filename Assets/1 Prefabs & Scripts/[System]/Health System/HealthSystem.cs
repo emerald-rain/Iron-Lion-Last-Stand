@@ -18,15 +18,13 @@ public class HealthSystem
     }
 
     // Метод для получения текущего здоровья
-    public int GetHealth()
-    {
+    public int GetHealth() {
         return health;
     }
 
     // Метод для получения процента текущего здоровья относительно максимального
-    public float GetHealthPercent()
-    {
-        return (float)health / healthMax;
+    public float GetHealthPercent() {
+        return (float) health / healthMax;
     }
 
     // Метод для нанесения урона здоровью

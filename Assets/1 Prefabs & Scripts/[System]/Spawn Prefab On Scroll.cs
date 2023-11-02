@@ -30,4 +30,12 @@ public class SpawnPrefabOnScroll : MonoBehaviour
             Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
         }
     }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(playerTransform.position, minDistance);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(playerTransform.position, maxDistance);
+    }
 }

@@ -33,9 +33,12 @@ public class SpawnPrefabOnScroll : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(playerTransform.position, minDistance);
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(playerTransform.position, maxDistance);
+        if (playerTransform != null)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(playerTransform.position, minDistance);
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(playerTransform.position, maxDistance);
+        }
     }
 }

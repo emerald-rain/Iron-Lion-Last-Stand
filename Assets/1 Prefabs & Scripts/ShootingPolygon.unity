@@ -908,6 +908,67 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SendPointerHoverToParent: 1
   m_ForceModuleActive: 0
+--- !u!1001 &1273680783
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4751306001929396348, guid: eef34d0bf48754c4aba7c2aaca236ca3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.24103713
+      objectReference: {fileID: 0}
+    - target: {fileID: 4751306001929396348, guid: eef34d0bf48754c4aba7c2aaca236ca3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.322213
+      objectReference: {fileID: 0}
+    - target: {fileID: 4751306001929396348, guid: eef34d0bf48754c4aba7c2aaca236ca3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4751306001929396348, guid: eef34d0bf48754c4aba7c2aaca236ca3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4751306001929396348, guid: eef34d0bf48754c4aba7c2aaca236ca3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4751306001929396348, guid: eef34d0bf48754c4aba7c2aaca236ca3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4751306001929396348, guid: eef34d0bf48754c4aba7c2aaca236ca3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4751306001929396348, guid: eef34d0bf48754c4aba7c2aaca236ca3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4751306001929396348, guid: eef34d0bf48754c4aba7c2aaca236ca3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4751306001929396348, guid: eef34d0bf48754c4aba7c2aaca236ca3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7254581485039127956, guid: eef34d0bf48754c4aba7c2aaca236ca3, type: 3}
+      propertyPath: m_Name
+      value: '[Enemy Prefab] Chaser'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7254581485039127956, guid: eef34d0bf48754c4aba7c2aaca236ca3, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: eef34d0bf48754c4aba7c2aaca236ca3, type: 3}
 --- !u!1 &1428900057
 GameObject:
   m_ObjectHideFlags: 0
@@ -1422,7 +1483,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4845276930943762971, guid: 2da3dcc22749e7f4280737786d898334, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.000045776367
+      value: 0.000076293945
       objectReference: {fileID: 0}
     - target: {fileID: 4845573536482310341, guid: 2da3dcc22749e7f4280737786d898334, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1669,7 +1730,7 @@ PrefabInstance:
     - target: {fileID: 8545137033836836494, guid: 439ae5427b8f0d94a9ccda665d062302, type: 3}
       propertyPath: prefabToSpawn
       value: 
-      objectReference: {fileID: 7036631684201179868, guid: c928fc035a56ba542b67f29260f71aa5, type: 3}
+      objectReference: {fileID: 7254581485039127956, guid: eef34d0bf48754c4aba7c2aaca236ca3, type: 3}
     m_RemovedComponents:
     - {fileID: 309720471879164072, guid: 439ae5427b8f0d94a9ccda665d062302, type: 3}
     m_RemovedGameObjects:
@@ -1781,3 +1842,4 @@ SceneRoots:
   - {fileID: 308667324}
   - {fileID: 380022572}
   - {fileID: 3754859703159832024}
+  - {fileID: 1273680783}

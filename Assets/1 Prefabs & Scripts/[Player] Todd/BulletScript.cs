@@ -5,6 +5,7 @@ using UnityEngine;
 public class BulletScript : MonoBehaviour
 {
     [SerializeField] private float force; // Публичная переменная для начальной силы пули
+    [SerializeField] private float lifespan = 5.0f; // Время жизни пули в секундах
 
     private Vector3 mousePos; // Хранит мировое положение щелчка мыши
     private Camera mainCam; // Ссылка на основную камеру в сцене
@@ -20,6 +21,9 @@ public class BulletScript : MonoBehaviour
         rb.velocity = new Vector2(direction.x, direction.y).normalized * force;
         float rot = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, rot - 90);
+
+        // Запустить корутину для уничтожения пули после заданного времени
+        StartCoroutine(DestroyBulletAfterDelay());
     }
 
     // Столкновение с объектом.
@@ -37,5 +41,12 @@ public class BulletScript : MonoBehaviour
         }
         // Если пуля столкнулась с чем-то другим, тоже уничтожаем её
         else Destroy(gameObject);
+    }
+
+    // Корутина для уничтожения пули после заданного времени
+    private IEnumerator DestroyBulletAfterDelay()
+    {
+        yield return new WaitForSeconds(lifespan);
+        Destroy(gameObject);
     }
 }

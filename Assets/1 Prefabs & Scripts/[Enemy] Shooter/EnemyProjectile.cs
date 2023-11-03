@@ -34,7 +34,7 @@ public class EnemyProjectile : MonoBehaviour
 
         if (other.CompareTag("Player"))
         {
-            print("should work");
+            print("Shooter hits the player and deals 20 damage.");
             CharacterHealth characterHealth = other.GetComponent<CharacterHealth>();
             if (characterHealth != null) characterHealth.TakeDamage(20);
             Destroy(gameObject);

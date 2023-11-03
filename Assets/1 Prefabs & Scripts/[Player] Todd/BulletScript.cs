@@ -1,15 +1,15 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
-    [SerializeField] private float force; // Публичная переменная для начальной силы пули
-    [SerializeField] private float lifespan = 5.0f; // Время жизни пули в секундах
+    [SerializeField] private float force;
+    [SerializeField] private float lifespan = 5.0f;
 
-    private Vector3 mousePos; // Хранит мировое положение щелчка мыши
-    private Camera mainCam; // Ссылка на основную камеру в сцене
-    private Rigidbody2D rb; // Ссылка на компонент Rigidbody2D этого объекта
+    private Vector3 mousePos;
+    private Camera mainCam;
+    private Rigidbody2D rb;
+    private bool canCollide = false;
 
     void Start()
     {
@@ -22,31 +22,34 @@ public class BulletScript : MonoBehaviour
         float rot = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, rot - 90);
 
-        // Запустить корутину для уничтожения пули после заданного времени
         StartCoroutine(DestroyBulletAfterDelay());
+        StartCoroutine(EnableCollision());
     }
 
-    // Столкновение с объектом.
-    void OnTriggerEnter2D(Collider2D other) {
-        // столкновение с объектом с тагом Enemy
+    void OnTriggerEnter2D(Collider2D other) 
+    {
+        if (!canCollide) return;
+
         if (other.CompareTag("Enemy")) {
-            // Получаем компонент EnemyHealth у врага (предполагается, что такой компонент существует)
             CharacterHealth characterHealth = other.GetComponent<CharacterHealth>();
-
-            // Засчитываем урон, если у объекта не 0 хп.
             if (characterHealth != null) characterHealth.TakeDamage(20);
-
-            // Уничтожаем пулю
             Destroy(gameObject);
         }
-        // Если пуля столкнулась с чем-то другим, тоже уничтожаем её
-        else Destroy(gameObject);
+        else 
+        {
+            Destroy(gameObject);
+        }
     }
 
-    // Корутина для уничтожения пули после заданного времени
     private IEnumerator DestroyBulletAfterDelay()
     {
         yield return new WaitForSeconds(lifespan);
         Destroy(gameObject);
+    }
+
+    IEnumerator EnableCollision()
+    {
+        yield return new WaitForSeconds(0.1f);
+        canCollide = true;
     }
 }

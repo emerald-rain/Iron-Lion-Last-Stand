@@ -1132,7 +1132,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4845276930943762971, guid: 2da3dcc22749e7f4280737786d898334, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000045776367
+      value: 0.000076293945
       objectReference: {fileID: 0}
     - target: {fileID: 4845573536482310341, guid: 2da3dcc22749e7f4280737786d898334, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1583,6 +1583,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8545137033836836494, guid: 439ae5427b8f0d94a9ccda665d062302, type: 3}
+      propertyPath: maxDistance
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8545137033836836494, guid: 439ae5427b8f0d94a9ccda665d062302, type: 3}
       propertyPath: prefabToSpawn
       value: 
       objectReference: {fileID: 8905213173403588893, guid: 70836ac84de9f264e8d42245f86b8d0e, type: 3}
@@ -1601,71 +1605,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 812264582881208600, guid: 439ae5427b8f0d94a9ccda665d062302, type: 3}
   m_PrefabInstance: {fileID: 3754859703159832024}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &6162129843361202660
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2364603070004625316, guid: 70836ac84de9f264e8d42245f86b8d0e, type: 3}
-      propertyPath: m_Speed
-      value: 2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2364603070004625316, guid: 70836ac84de9f264e8d42245f86b8d0e, type: 3}
-      propertyPath: m_ObstacleAvoidanceType
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8905213173403588893, guid: 70836ac84de9f264e8d42245f86b8d0e, type: 3}
-      propertyPath: m_Name
-      value: '[Enemy Prefab] Chaser'
-      objectReference: {fileID: 0}
-    - target: {fileID: 9145015990536703567, guid: 70836ac84de9f264e8d42245f86b8d0e, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.24103713
-      objectReference: {fileID: 0}
-    - target: {fileID: 9145015990536703567, guid: 70836ac84de9f264e8d42245f86b8d0e, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -2.322213
-      objectReference: {fileID: 0}
-    - target: {fileID: 9145015990536703567, guid: 70836ac84de9f264e8d42245f86b8d0e, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9145015990536703567, guid: 70836ac84de9f264e8d42245f86b8d0e, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9145015990536703567, guid: 70836ac84de9f264e8d42245f86b8d0e, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9145015990536703567, guid: 70836ac84de9f264e8d42245f86b8d0e, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9145015990536703567, guid: 70836ac84de9f264e8d42245f86b8d0e, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9145015990536703567, guid: 70836ac84de9f264e8d42245f86b8d0e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9145015990536703567, guid: 70836ac84de9f264e8d42245f86b8d0e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9145015990536703567, guid: 70836ac84de9f264e8d42245f86b8d0e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 70836ac84de9f264e8d42245f86b8d0e, type: 3}
 --- !u!114 &8800691720052659933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1679,6 +1618,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pfHealthBar: {fileID: 4001194413639355407, guid: d7f6589184aa1a046b8826507ad24d50, type: 3}
+  maxWidth: 0.8
+  fixedHeight: 0.1
   healthBarOffset: {x: 0, y: 1, z: 0}
   maxHealth: 100
 --- !u!1660057539 &9223372036854775807
@@ -1690,4 +1631,3 @@ SceneRoots:
   - {fileID: 3754859703159832024}
   - {fileID: 1004975885}
   - {fileID: 600444764}
-  - {fileID: 6162129843361202660}

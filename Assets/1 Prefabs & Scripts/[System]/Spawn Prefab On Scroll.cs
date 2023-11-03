@@ -2,14 +2,12 @@ using UnityEngine;
 
 public class SpawnPrefabOnScroll : MonoBehaviour
 {
-    public GameObject prefabToSpawn;
-    public float minDistance = 5.0f;
-    public float maxDistance = 10.0f;
-
+    [SerializeField] private GameObject prefabToSpawn;
+    [SerializeField] private float minDistance = 5.0f;
+    [SerializeField] private float maxDistance = 10.0f;
     private Transform playerTransform;
 
-    private void Start()
-    {
+    private void Start() {
         playerTransform = GameObject.FindWithTag("Player").transform;
     }
 
@@ -27,7 +25,7 @@ public class SpawnPrefabOnScroll : MonoBehaviour
             Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
         }
     }
-
+    
     private void OnDrawGizmosSelected()
     {
         if (playerTransform != null)

@@ -1,39 +1,64 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private Rigidbody2D rb; // Reference to the player's Rigidbody2D component
-    private float vertical; // Store the vertical input value
-    private float horizontal; // Store the horizontal input value
-
-    public float moveSpeed; // Public variable to control the player's movement speed
-    public float speedLimit = 0.7f; // Public variable to limit diagonal movement speed
+    private Rigidbody2D rb;
+    private Animator animator;
+    private float horizontal;
+    private float vertical;
+    public float moveSpeed = 5f;
+    public float speedLimit = 0.7f;
+    private string currentState;
+    const string PLAYER_IDLE = "player_idle";
+    const string PLAYER_WALK = "player_walk";
 
     void Start()
     {
-        // Get the Rigidbody2D component attached to this GameObject
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     void Update()
     {
-        // Get horizontal and vertical input values
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
+
+        // Set the animation state and flip the sprite in the direction of movement
+        SetMovementAnimation(horizontal, vertical);
     }
 
     void FixedUpdate()
     {
-        // Check if both horizontal and vertical movement is active and apply speed limit
-        if (horizontal != 0 && vertical != 0)
-        {
-            horizontal *= speedLimit;
-            vertical *= speedLimit;
-        }
+        Vector2 limitedSpeed = new Vector2(horizontal, vertical) * (horizontal != 0 && vertical != 0 ? speedLimit : 1f);
+        rb.velocity = limitedSpeed * moveSpeed;
+    }
 
-        // Set the velocity of the player based on input
-        rb.velocity = new Vector2(horizontal * moveSpeed, vertical * moveSpeed);
+    void SetMovementAnimation(float horizontal, float vertical)
+    {
+        // Determine whether the player is walking or idle
+        bool isWalking = horizontal != 0 || vertical != 0;
+        ChangeAnimationState(isWalking ? PLAYER_WALK : PLAYER_IDLE);
+        
+        // If the player is walking, flip the sprite based on the direction
+        if (isWalking)
+        {
+            FlipSprite(horizontal);
+        }
+    }
+
+    void FlipSprite(float horizontal)
+    {
+        if (horizontal != 0)
+        {
+            // Get the SpriteRenderer component and flip it on the x-axis.
+            GetComponent<SpriteRenderer>().flipX = horizontal < 0;
+        }
+    }
+
+    void ChangeAnimationState(string newState)
+    {
+        if (currentState == newState) return;
+        animator.Play(newState);
+        currentState = newState;
     }
 }

@@ -1,52 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Shooting : MonoBehaviour
+public class PlayerShooting : MonoBehaviour
 {
-    private Camera mainCam;  // Reference to the main camera in the scene
-    private Vector3 mousePos;  // Stores the world position of the mouse
+    public GameObject bullet;
+    public Transform bulletTransform;
+    public float timeBetweenFiring;
 
-    public GameObject bullet; // Prefab for the bullet
-    public Transform bulletTransform; // Transform to specify bullet spawn position
-    public bool canFire; // Flag indicating if the player can fire
-    private float timer; // Timer for controlling firing rate
-    public float timeBetweenFiring; // Time interval between shots
-
-    void Start()
-    {
-        // Find the main camera in the scene by tag
-        mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-    }
+    private float timer;
 
     void Update()
     {
-        // Convert mouse position to world coordinates
-        mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
-
-        // Calculate the rotation of the gun towards the mouse
-        Vector3 rotation = mousePos - transform.position;
-        float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
+        // Rotate gun towards mouse
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        float rotZ = Mathf.Atan2(mousePos.y - transform.position.y, mousePos.x - transform.position.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, rotZ);
 
-        if (!canFire)
-        {
-            // Increment the timer
-            timer += Time.deltaTime;
+        // Flip weapon if mouse is to the left of the player
+        bool isMouseToLeft = mousePos.x < transform.position.x;
+        Vector3 scale = transform.localScale;
+        scale.y = isMouseToLeft ? -1 : 1;
+        transform.localScale = scale;
 
-            // Check if enough time has passed to allow firing again
-            if (timer > timeBetweenFiring)
-            {
-                canFire = true;
-                timer = 0;
-            }
-        }
-
-        // Check for mouse button press and whether the player can fire
-        if (Input.GetMouseButton(0) && canFire)
+        // Fire bullet
+        timer += Time.deltaTime;
+        if (Input.GetMouseButton(0) && timer > timeBetweenFiring)
         {
-            canFire = false;
-            // Instantiate a bullet at the specified position
+            timer = 0;
             Instantiate(bullet, bulletTransform.position, Quaternion.identity);
         }
     }

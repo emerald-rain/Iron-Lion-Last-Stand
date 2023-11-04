@@ -2,15 +2,16 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+
     private Rigidbody2D rb;
-    private Animator animator;
-    private float horizontal;
-    private float vertical;
-    public float moveSpeed = 5f;
-    public float speedLimit = 0.7f;
-    private string currentState;
-    const string PLAYER_IDLE = "player_idle";
-    const string PLAYER_WALK = "player_walk";
+    private float horizontal, vertical; 
+    public float movementSpeed = 5f; // normal straight line speed
+    public float speedLimit = 0.7f; // slows down diagonal movement in percent
+
+    private Animator animator; // on player animator
+    private string currentState; // current animation state
+    const string PLAYER_IDLE = "player_idle"; // idle animation
+    const string PLAYER_WALK = "player_walk"; // walk animation
 
     void Start()
     {
@@ -23,42 +24,46 @@ public class PlayerMovement : MonoBehaviour
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
 
-        // Set the animation state and flip the sprite in the direction of movement
-        SetMovementAnimation(horizontal, vertical);
-    }
-
-    void FixedUpdate()
-    {
-        Vector2 limitedSpeed = new Vector2(horizontal, vertical) * (horizontal != 0 && vertical != 0 ? speedLimit : 1f);
-        rb.velocity = limitedSpeed * moveSpeed;
-    }
-
-    void SetMovementAnimation(float horizontal, float vertical)
-    {
-        // Determine whether the player is walking or idle
-        bool isWalking = horizontal != 0 || vertical != 0;
-        ChangeAnimationState(isWalking ? PLAYER_WALK : PLAYER_IDLE);
+        Vector2 movement = new Vector2(horizontal, vertical);
         
-        // If the player is walking, flip the sprite based on the direction
-        if (isWalking)
+        // Limiting the speed when moving diagonally
+        if (movement.magnitude >= speedLimit)
         {
-            FlipSprite(horizontal);
+            movement = movement.normalized * speedLimit;
         }
+
+        MovePlayer(movement);
+
+        // Update animation
+        UpdateAnimation(movement);
     }
 
-    void FlipSprite(float horizontal)
+    void MovePlayer(Vector2 movement)
     {
-        if (horizontal != 0)
+        rb.velocity = new Vector2(movement.x * movementSpeed, movement.y * movementSpeed);
+    }
+
+    void UpdateAnimation(Vector2 movement)
+    {
+        if (movement != Vector2.zero)
         {
-            // Get the SpriteRenderer component and flip it on the x-axis.
-            GetComponent<SpriteRenderer>().flipX = horizontal < 0;
+            ChangeAnimationState(PLAYER_WALK);
+        }
+        else
+        {
+            ChangeAnimationState(PLAYER_IDLE);
         }
     }
 
     void ChangeAnimationState(string newState)
     {
+        // Stop the same animation from interrupting itself
         if (currentState == newState) return;
+
+        // Play the new animation
         animator.Play(newState);
+
+        // Reassign the current state
         currentState = newState;
     }
 }

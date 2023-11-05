@@ -1747,6 +1747,14 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 2281460493430661582, guid: f87548fe8336dd9489ea97c9eaa2f7a4, type: 3}
+      propertyPath: idleSpread
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2281460493430661582, guid: f87548fe8336dd9489ea97c9eaa2f7a4, type: 3}
+      propertyPath: movingSpread
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2281460493430661582, guid: f87548fe8336dd9489ea97c9eaa2f7a4, type: 3}
       propertyPath: timeBetweenFiring
       value: 0.17
       objectReference: {fileID: 0}

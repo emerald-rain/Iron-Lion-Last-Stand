@@ -5,7 +5,7 @@ public class PlayerShooting : MonoBehaviour
     public GameObject bullet;
     public Transform bulletTransform;
     public float timeBetweenFiring;
-
+    
     private float timer;
 
     void Update()

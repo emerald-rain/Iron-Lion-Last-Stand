@@ -1,55 +1,34 @@
-using System.Collections;
 using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
     [SerializeField] private float force;
-    [SerializeField] private float lifespan = 5.0f;
+    [SerializeField] private float lifespan = 10.0f;
 
-    private Vector3 mousePos;
-    private Camera mainCam;
     private Rigidbody2D rb;
-    private bool canCollide = false;
 
     void Start()
     {
-        mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         rb = GetComponent<Rigidbody2D>();
-        mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
-        Vector3 direction = mousePos - transform.position;
-        Vector3 rotation = transform.position - mousePos;
-        rb.velocity = new Vector2(direction.x, direction.y).normalized * force;
-        float rot = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, rot - 90);
+        
+        // Convert the mouse position from screen coordinates to world coordinates
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        // Calculate the direction vector from the bullet's position to the mouse position
+        Vector2 direction = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y);
 
-        StartCoroutine(DestroyBulletAfterDelay());
-        StartCoroutine(EnableCollision());
+        rb.velocity = direction.normalized * force;
+        transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90);
+        Destroy(gameObject, lifespan);
     }
 
-    void OnTriggerEnter2D(Collider2D other) 
+    void OnTriggerEnter2D(Collider2D other)
     {
-        if (!canCollide) return;
-
-        if (other.CompareTag("Enemy")) {
+        if (other.CompareTag("Enemy"))
+        {
             CharacterHealth characterHealth = other.GetComponent<CharacterHealth>();
             if (characterHealth != null) characterHealth.TakeDamage(20);
-            Destroy(gameObject);
         }
-        else 
-        {
-            Destroy(gameObject);
-        }
-    }
 
-    private IEnumerator DestroyBulletAfterDelay()
-    {
-        yield return new WaitForSeconds(lifespan);
         Destroy(gameObject);
-    }
-
-    IEnumerator EnableCollision()
-    {
-        yield return new WaitForSeconds(0.1f);
-        canCollide = true;
     }
 }

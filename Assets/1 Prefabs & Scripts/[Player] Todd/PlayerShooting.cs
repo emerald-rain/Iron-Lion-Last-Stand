@@ -26,7 +26,16 @@ public class PlayerShooting : MonoBehaviour
         if (Input.GetMouseButton(0) && timer > timeBetweenFiring)
         {
             timer = 0;
-            Instantiate(bullet, bulletTransform.position, Quaternion.identity);
+            Vector3 spawnPosition = bulletTransform.position + bulletTransform.right;
+            Instantiate(bullet, spawnPosition, bulletTransform.rotation);
         }
+    }
+
+    void OnDrawGizmos()
+    {
+        // Draw a line from bullet spawn point to mouse position
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(bulletTransform.position, new Vector3(mousePos.x, mousePos.y, bulletTransform.position.z));
     }
 }

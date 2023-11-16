@@ -8,11 +8,13 @@ public class ShootingEnemy : MonoBehaviour
     [SerializeField] private float timeBetweenShots;
     
     private NavMeshAgent agent;
+    private Animator animator;
     private float nextShotTime;
 
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
         agent.updateRotation = false;
 
         GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -26,6 +28,7 @@ public class ShootingEnemy : MonoBehaviour
     {
         if (target != null && agent.isActiveAndEnabled)
             agent.SetDestination(target.position);
+            animator.SetBool("isWalking", agent.remainingDistance > agent.stoppingDistance);
             
         if (target != null && Time.time > nextShotTime)
         {
@@ -33,6 +36,8 @@ public class ShootingEnemy : MonoBehaviour
             float angle = Mathf.Atan2(directionToTarget.y, directionToTarget.x) * Mathf.Rad2Deg;
             Instantiate(projectile, transform.position, Quaternion.Euler(0, 0, angle));
             nextShotTime = Time.time + timeBetweenShots;
+
+            animator.SetBool("IsWalking", false);
         }
         transform.rotation = Quaternion.Euler(0, 0, 0);
     }

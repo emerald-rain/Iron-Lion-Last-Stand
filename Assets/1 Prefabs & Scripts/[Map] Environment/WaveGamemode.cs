@@ -1,20 +1,28 @@
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using System.Collections.Generic;
 
 public class WaveGamemode : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> enemyPrefabs; // Список префабов врагов
+    [Header("Tilemap to spawn on and enemy prefabs")]
+    [SerializeField] private Tilemap groundTilemap;
+    [SerializeField] private List<GameObject> enemyPrefabs;
+
+    [Header("Distance from player")]
     [SerializeField] private float minDistance = 17f;
     [SerializeField] private float maxDistance = 30f;
-    [SerializeField] private float minSpawnTime = 20f; // Минимальное время для спавна врагов
-    [SerializeField] private float maxSpawnTime = 30f; // Максимальное время для спавна врагов
-    [SerializeField] private int enemiesToSpawn = 3; // Количество врагов для спавна
+
+    [Header("Time beetween spawning and enemys")]
+    [SerializeField] private float minSpawnTime = 20f; 
+    [SerializeField] private float maxSpawnTime = 30f;
+    [SerializeField] private int enemiesToSpawn = 3;
 
     private Transform playerTransform;
     private float spawnTimer;
 
     private void Start() {
         playerTransform = GameObject.FindWithTag("Player").transform;
+        groundTilemap = GameObject.Find("tilemap_ground").GetComponent<Tilemap>();
         spawnTimer = Random.Range(minSpawnTime, maxSpawnTime);
     }
 
@@ -30,16 +38,24 @@ public class WaveGamemode : MonoBehaviour
 
     private void SpawnEnemies() {
         for (int i = 0; i < enemiesToSpawn; i++) {
-            float randomDistance = Random.Range(minDistance, maxDistance);
-            Vector3 randomDirection = Random.onUnitSphere;
-            randomDirection.z = 0; // Сбрасываем Z-координату
+            Vector3 spawnPosition;
+            bool positionFound = false;
 
-            Vector3 spawnPosition = playerTransform.position + randomDirection * randomDistance;
+            while (!positionFound) {
+                float randomDistance = Random.Range(minDistance, maxDistance);
+                Vector3 randomDirection = Random.onUnitSphere;
+                randomDirection.z = 0;
 
-            int randomIndex = Random.Range(0, enemyPrefabs.Count);
-            GameObject prefabToSpawn = enemyPrefabs[randomIndex];
+                spawnPosition = playerTransform.position + randomDirection * randomDistance;
+                Vector3Int tilePosition = groundTilemap.WorldToCell(spawnPosition); 
 
-            Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
+                if (groundTilemap.HasTile(tilePosition)) { 
+                    positionFound = true;
+                    int randomIndex = Random.Range(0, enemyPrefabs.Count);
+                    GameObject prefabToSpawn = enemyPrefabs[randomIndex];
+                    Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
+                }
+            }
         }
     }
 }

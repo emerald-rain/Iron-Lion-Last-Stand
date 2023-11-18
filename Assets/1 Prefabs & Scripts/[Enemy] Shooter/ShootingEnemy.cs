@@ -1,24 +1,56 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class ShootingEnemy : MonoBehaviour
 {
-    [SerializeField] private Transform target;  // Reference to the player's Transform (target)
-    [SerializeField] private GameObject projectile;  // Projectile to be instantiated
-    [SerializeField] private float timeBetweenShots;  // Time interval between shots
+    [SerializeField] private Transform target;
+    [SerializeField] private GameObject projectile;
+    [SerializeField] private float timeBetweenShots;
     
-    private float nextShotTime;  // Next time when the enemy can shoot
+    private NavMeshAgent agent;
+    private Animator animator;
+    private float nextShotTime;
+
+    private void Start()
+    {
+        agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
+
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+            target = player.transform;
+    }
 
     private void Update()
     {
-        if (Time.time > nextShotTime) // Check if it's time to shoot
+        if (target != null && agent.isActiveAndEnabled)
+            agent.SetDestination(target.position);
+            UpdateAnimationAndFlip();
+            
+        if (target != null && Time.time > nextShotTime && agent.velocity.magnitude < 0.1f)
         {
-            // Instantiate a projectile at the enemy's position
-            Instantiate(projectile, transform.position, Quaternion.identity);
-
-            // Update the next shot time
+            Vector2 directionToTarget = (target.position - transform.position).normalized;
+            float angle = Mathf.Atan2(directionToTarget.y, directionToTarget.x) * Mathf.Rad2Deg;
+            Instantiate(projectile, transform.position, Quaternion.Euler(0, 0, angle));
             nextShotTime = Time.time + timeBetweenShots;
+        }
+
+        transform.rotation = Quaternion.Euler(0, 0, 0);
+    }
+
+    private void UpdateAnimationAndFlip()
+    {
+        bool isWalking = agent.remainingDistance > agent.stoppingDistance;
+        animator.SetBool("isWalking", isWalking);
+
+        if (isWalking)
+        {
+            Vector3 direction = (agent.destination - transform.position).normalized;
+
+            if (direction.x < 0) // LEFT
+                transform.localScale = new Vector3(-1, 1, 1);
+            else if (direction.x > 0) // RIGHT
+                transform.localScale = new Vector3(1, 1, 1);
         }
     }
 }

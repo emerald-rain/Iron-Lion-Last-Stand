@@ -1,41 +1,39 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
-    [SerializeField] private float force; // Публичная переменная для начальной силы пули
+    [SerializeField] private float force;
+    [SerializeField] private float lifespan = 5.0f;
+    [SerializeField] private int strayFactor = 5;
 
-    private Vector3 mousePos; // Хранит мировое положение щелчка мыши
-    private Camera mainCam; // Ссылка на основную камеру в сцене
-    private Rigidbody2D rb; // Ссылка на компонент Rigidbody2D этого объекта
+    private Rigidbody2D rb;
 
     void Start()
     {
-        mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         rb = GetComponent<Rigidbody2D>();
-        mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
-        Vector3 direction = mousePos - transform.position;
-        Vector3 rotation = transform.position - mousePos;
-        rb.velocity = new Vector2(direction.x, direction.y).normalized * force;
-        float rot = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, rot - 90);
+
+        // Convert the mouse position from screen coordinates to world coordinates
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        // Calculate the direction vector from the bullet's position to the mouse position
+        Vector2 direction = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y);
+
+        float strayX = Random.Range(-strayFactor, strayFactor);
+        float strayY = Random.Range(-strayFactor, strayFactor);
+        direction += new Vector2(strayX, strayY).normalized * Random.Range(0f, 1f);
+
+        rb.velocity = direction.normalized * force;
+        transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90);
+        Destroy(gameObject, lifespan);
     }
 
-    // Столкновение с объектом.
-    void OnTriggerEnter2D(Collider2D other) {
-        // столкновение с объектом с тагом Enemy
-        if (other.CompareTag("Enemy")) {
-            // Получаем компонент EnemyHealth у врага (предполагается, что такой компонент существует)
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
             CharacterHealth characterHealth = other.GetComponent<CharacterHealth>();
-
-            // Засчитываем урон, если у объекта не 0 хп.
             if (characterHealth != null) characterHealth.TakeDamage(20);
-
-            // Уничтожаем пулю
-            Destroy(gameObject);
         }
-        // Если пуля столкнулась с чем-то другим, тоже уничтожаем её
-        else Destroy(gameObject);
+
+        Destroy(gameObject);
     }
 }

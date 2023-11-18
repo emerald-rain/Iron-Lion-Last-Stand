@@ -5,6 +5,8 @@ on:
   # Runs on pushes targeting the default branch
   push:
     branches: ["main"]
+    paths:
+      - "WebGLBuilds/**"
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -34,9 +36,10 @@ jobs:
         uses: actions/jekyll-build-pages@v1
         with:
           source: ./WebGLBuilds
-          destination: ./_site/WebGLBuilds
+          destination: ./_site
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
+
   # Deployment job
   deploy:
     environment:

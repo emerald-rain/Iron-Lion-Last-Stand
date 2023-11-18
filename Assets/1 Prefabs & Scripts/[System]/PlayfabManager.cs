@@ -46,7 +46,7 @@ public class PlayfabManager : MonoBehaviour
     {
         messageText.text = "Register and logged in!";
 
-        SceneManager.LoadScene("ShootingPolygon");
+        SceneManager.LoadScene("WaveAttack");
     }
 
     void OnError(PlayFabError error)
@@ -60,6 +60,6 @@ public class PlayfabManager : MonoBehaviour
         messageText.text = "Logged in!";
         Debug.Log("Successfull Login!");
 
-        SceneManager.LoadScene("ShootingPolygon");
+        SceneManager.LoadScene("WaveAttack");
     }
 }

@@ -27,7 +27,7 @@ public class ShootingEnemy : MonoBehaviour
             agent.SetDestination(target.position);
             UpdateAnimationAndFlip();
             
-        if (target != null && Time.time > nextShotTime)
+        if (target != null && Time.time > nextShotTime && agent.velocity.magnitude < 0.1f)
         {
             Vector2 directionToTarget = (target.position - transform.position).normalized;
             float angle = Mathf.Atan2(directionToTarget.y, directionToTarget.x) * Mathf.Rad2Deg;

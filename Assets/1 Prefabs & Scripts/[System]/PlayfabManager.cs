@@ -15,7 +15,7 @@ public class PlayfabManager : MonoBehaviour
 
     public void RegisterButton()
     {
-        if (passwordInput.text.Length > 6)
+        if (passwordInput.text.Length < 6)
         {
             messageText.text = "Password is too short.";
             return;

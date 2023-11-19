@@ -2,9 +2,10 @@ using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
-    [SerializeField] private float force;
+    [SerializeField] private float force = 50f;
     [SerializeField] private float lifespan = 5.0f;
-    [SerializeField] private int strayFactor = 5;
+    [SerializeField] private int strayFactor = 1;
+    [SerializeField] private float minSpeedToRemove = 5f; // Новая переменная для минимальной скорости
 
     private Rigidbody2D rb;
 
@@ -26,6 +27,11 @@ public class BulletScript : MonoBehaviour
         Destroy(gameObject, lifespan);
     }
 
+    void Update() { // destroy bullet if speed < 5
+        if (rb.velocity.magnitude < minSpeedToRemove)
+            Destroy(gameObject);
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Enemy"))
@@ -33,7 +39,7 @@ public class BulletScript : MonoBehaviour
             CharacterHealth characterHealth = other.GetComponent<CharacterHealth>();
             if (characterHealth != null) characterHealth.TakeDamage(20);
         }
-
+        
         Destroy(gameObject);
     }
 }

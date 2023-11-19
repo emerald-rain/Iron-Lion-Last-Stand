@@ -774,7 +774,7 @@ GameObject:
   - component: {fileID: 390123185}
   m_Layer: 0
   m_Name: '[Walkable] [0] Basic ground'
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45357,7 +45357,7 @@ GameObject:
   - component: {fileID: 1388633162}
   m_Layer: 0
   m_Name: '[NonWalkable] [2] Trees'
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46022,6 +46022,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 827655483864260672, guid: 145c396974289434e879243cb36188e4, type: 3}
       propertyPath: m_OverrideVoxelSize
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293357646852882453, guid: 145c396974289434e879243cb36188e4, type: 3}
+      propertyPath: m_CompressBounds
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2189001399065912205, guid: 145c396974289434e879243cb36188e4, type: 3}
@@ -46888,7 +46892,7 @@ CompositeCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

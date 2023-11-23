@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4717177726869285679}
   - component: {fileID: 649675507692533733}
   m_Layer: 0
-  m_Name: '[Enemy Prefab] Chaser 1'
+  m_Name: '[Enemy Prefab] Chaser'
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

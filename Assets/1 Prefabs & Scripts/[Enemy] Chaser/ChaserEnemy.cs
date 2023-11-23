@@ -12,6 +12,7 @@ public class ChaserEnemy : MonoBehaviour
 
     private bool isCountingDown;
     private float countdownTimer;
+    private bool hasExploded;
     
     void Start() {
         agent = GetComponent<NavMeshAgent>();
@@ -56,6 +57,13 @@ public class ChaserEnemy : MonoBehaviour
             }
         }
 
+        animator.SetTrigger("Explode");
+        hasExploded = true;
+        agent.enabled = false;
+        this.enabled = false;
+    }
+
+    public void DestroyEnemy() {
         Destroy(gameObject);
     }
 

@@ -195,6 +195,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  explosionRadius: 2.5
+  explosionDamage: 50
 --- !u!195 &4717177726869285679
 NavMeshAgent:
   m_ObjectHideFlags: 0

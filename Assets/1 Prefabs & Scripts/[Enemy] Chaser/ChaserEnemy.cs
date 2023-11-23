@@ -4,9 +4,14 @@ using UnityEngine.AI;
 public class ChaserEnemy : MonoBehaviour
 {
     [SerializeField] private Transform target;
+    [SerializeField] private float explosionRadius = 3f;
+    [SerializeField] private int explosionDamage = 50;
 
-    private NavMeshAgent agent;
-    private Animator animator;
+    private NavMeshAgent agent; // AI movement agent
+    private Animator animator; // animation controller
+
+    private bool isCountingDown;
+    private float countdownTimer;
     
     void Start() {
         agent = GetComponent<NavMeshAgent>();
@@ -18,11 +23,40 @@ public class ChaserEnemy : MonoBehaviour
     }
 
     void Update() {
-        if (target != null && agent.isActiveAndEnabled)
+        if (target != null && agent.isActiveAndEnabled) {
             agent.SetDestination(target.position);
             UpdateAnimationAndFlip();
+
+            bool isWithinStoppingDistance = agent.remainingDistance <= agent.stoppingDistance;
+            if (isWithinStoppingDistance) {
+                if (!isCountingDown) {
+                    isCountingDown = true;
+                    countdownTimer = 0f;
+                }
+                else {
+                    countdownTimer += Time.deltaTime;
+                    if (countdownTimer >= 1.3f) {
+                        Explode();
+                    }
+                }
+            }
+            else { isCountingDown = false; }
         
         transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+    }
+
+    private void Explode() {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
+
+        foreach (Collider2D collider in colliders){
+            CharacterHealth characterHealth = collider.GetComponent<CharacterHealth>();
+            if (characterHealth != null) {
+                characterHealth.TakeDamage(explosionDamage);
+            }
+        }
+
+        Destroy(gameObject);
     }
 
     private void UpdateAnimationAndFlip() {

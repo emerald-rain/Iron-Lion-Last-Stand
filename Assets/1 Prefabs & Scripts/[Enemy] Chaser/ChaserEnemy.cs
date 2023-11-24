@@ -3,16 +3,17 @@ using UnityEngine.AI;
 
 public class ChaserEnemy : MonoBehaviour
 {
-    [SerializeField] private Transform target;
+    [SerializeField] private float explosionPreparation = 0.5f;
     [SerializeField] private float explosionRadius = 3f;
     [SerializeField] private int explosionDamage = 50;
 
     private NavMeshAgent agent; // AI movement agent
     private Animator animator; // animation controller
 
+    private Transform target;
+
     private bool isCountingDown;
     private float countdownTimer;
-    private bool hasExploded;
     
     void Start() {
         agent = GetComponent<NavMeshAgent>();
@@ -36,7 +37,7 @@ public class ChaserEnemy : MonoBehaviour
                 }
                 else {
                     countdownTimer += Time.deltaTime;
-                    if (countdownTimer >= 1.3f) {
+                    if (countdownTimer >= explosionPreparation) {
                         Explode();
                     }
                 }
@@ -58,9 +59,7 @@ public class ChaserEnemy : MonoBehaviour
         }
 
         animator.SetTrigger("Explode");
-        hasExploded = true;
         agent.enabled = false;
-        this.enabled = false;
     }
 
     public void DestroyEnemy() {

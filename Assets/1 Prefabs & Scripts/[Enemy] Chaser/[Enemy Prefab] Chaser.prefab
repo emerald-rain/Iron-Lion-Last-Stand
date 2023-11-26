@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 213011710722263758}
   - component: {fileID: 4475582969928029169}
   - component: {fileID: 4116626176134529890}
-  - component: {fileID: 1757792131146559687}
+  - component: {fileID: 8991782016567361134}
   - component: {fileID: 9037515447531069814}
   - component: {fileID: 1233709183952414875}
   - component: {fileID: 4717177726869285679}
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 99
+  m_SortingOrder: 4
   m_Sprite: {fileID: -1415403804, guid: dc57dd5d12c78ad408c99453a126f7da, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -107,8 +107,8 @@ MonoBehaviour:
   fixedHeight: 0.1
   healthBarOffset: {x: 0, y: 1, z: 0}
   maxHealth: 100
---- !u!60 &1757792131146559687
-PolygonCollider2D:
+--- !u!61 &8991782016567361134
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -139,7 +139,7 @@ PolygonCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.42232502, y: -0.30354607}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -149,12 +149,9 @@ PolygonCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0, y: 0.5773587}
-      - {x: -0.5, y: -0.28866667}
-      - {x: 0.5, y: -0.28866667}
-  m_UseDelaunayMesh: 0
+  serializedVersion: 2
+  m_Size: {x: 1.1729467, y: 1.3929079}
+  m_EdgeRadius: 0
 --- !u!50 &9037515447531069814
 Rigidbody2D:
   serializedVersion: 4
@@ -194,7 +191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed0b50a638c28c84a807f950a4627e96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  explosionPreparation: 0.5
   explosionRadius: 2.5
   explosionDamage: 50
 --- !u!195 &4717177726869285679

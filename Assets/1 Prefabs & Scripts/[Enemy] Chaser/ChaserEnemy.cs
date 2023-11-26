@@ -38,14 +38,17 @@ public class ChaserEnemy : MonoBehaviour
                 else {
                     countdownTimer += Time.deltaTime;
                     if (countdownTimer >= explosionPreparation) {
+                        Transform phHealthBaer = transform.Find("pfHealthBar(Clone)");
+                        if (phHealthBaer != null)
+                            Destroy(phHealthBaer.gameObject); // Deleting hp bar
                         Explode();
                     }
                 }
             }
             else { isCountingDown = false; }
-        
-        transform.rotation = Quaternion.Euler(0, 0, 0);
         }
+
+        transform.rotation = Quaternion.Euler(0, 0, 0);
     }
 
     private void Explode() {

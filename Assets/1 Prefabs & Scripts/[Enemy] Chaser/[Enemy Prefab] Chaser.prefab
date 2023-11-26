@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 213011710722263758}
   - component: {fileID: 4475582969928029169}
-  - component: {fileID: 4116626176134529890}
+  - component: {fileID: -6210648419929160754}
   - component: {fileID: 8991782016567361134}
   - component: {fileID: 9037515447531069814}
   - component: {fileID: 1233709183952414875}
@@ -90,7 +90,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4116626176134529890
+--- !u!114 &-6210648419929160754
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -99,7 +99,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3816676736364502233}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97d6215ff0c8f954ba1ecac8e77b2fc7, type: 3}
+  m_Script: {fileID: 11500000, guid: 2b30d00286c6fbe4b9bc6eb4371e1274, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pfHealthBar: {fileID: 4001194413639355407, guid: d7f6589184aa1a046b8826507ad24d50, type: 3}
@@ -107,6 +107,7 @@ MonoBehaviour:
   fixedHeight: 0.1
   healthBarOffset: {x: 0, y: 1, z: 0}
   maxHealth: 100
+  scoreManager: {fileID: 0}
 --- !u!61 &8991782016567361134
 BoxCollider2D:
   m_ObjectHideFlags: 0

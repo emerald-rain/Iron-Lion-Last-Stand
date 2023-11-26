@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 398012204688853058}
   - component: {fileID: 8501947543160936555}
   - component: {fileID: 7043643537834515883}
+  - component: {fileID: 6650366623219577310}
   - component: {fileID: -9058971671494086298}
-  - component: {fileID: -5522082861406275087}
   - component: {fileID: -912586619634354469}
   - component: {fileID: 6437945321210566184}
   - component: {fileID: 3619521926024583270}
@@ -106,6 +106,23 @@ MonoBehaviour:
   target: {fileID: 0}
   projectile: {fileID: 5790660457787449185, guid: 7a1931723e2dffb49ad5cacc69942898, type: 3}
   timeBetweenShots: 5
+--- !u!114 &6650366623219577310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 344445916090762764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aee2fd3f1ed27d64dba7e466cd123e9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pfHealthBar: {fileID: 4001194413639355407, guid: d7f6589184aa1a046b8826507ad24d50, type: 3}
+  maxWidth: 0.8
+  fixedHeight: 0.1
+  healthBarOffset: {x: 0, y: 1, z: 0}
+  maxHealth: 100
 --- !u!195 &-9058971671494086298
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -128,23 +145,6 @@ NavMeshAgent:
   m_BaseOffset: 0.71133333
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &-5522082861406275087
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 344445916090762764}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97d6215ff0c8f954ba1ecac8e77b2fc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pfHealthBar: {fileID: 4001194413639355407, guid: d7f6589184aa1a046b8826507ad24d50, type: 3}
-  maxWidth: 0.8
-  fixedHeight: 0.1
-  healthBarOffset: {x: 0, y: 1, z: 0}
-  maxHealth: 100
 --- !u!61 &-912586619634354469
 BoxCollider2D:
   m_ObjectHideFlags: 0

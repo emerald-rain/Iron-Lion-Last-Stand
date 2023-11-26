@@ -22,7 +22,7 @@ public class WaveGamemode : MonoBehaviour
 
     private void Start() {
         playerTransform = GameObject.FindWithTag("Player").transform;
-        groundTilemap = GameObject.Find("tilemap_ground").GetComponent<Tilemap>();
+        groundTilemap = GameObject.Find("[Walkable] [0] Basic ground").GetComponent<Tilemap>();
         spawnTimer = Random.Range(minSpawnTime, maxSpawnTime);
     }
 

@@ -36,8 +36,11 @@ public class BulletScript : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            CharacterHealth characterHealth = other.GetComponent<CharacterHealth>();
-            if (characterHealth != null) characterHealth.TakeDamage(20);
+            ChaserHealth chaserHealth = other.GetComponent<ChaserHealth>();
+            if (chaserHealth != null) chaserHealth.TakeDamage(20);
+
+            ShooterHealth shooterHealth = other.GetComponent<ShooterHealth>();
+            if (shooterHealth != null) shooterHealth.TakeDamage(20);
         }
         
         Destroy(gameObject);

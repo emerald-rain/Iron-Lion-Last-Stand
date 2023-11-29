@@ -8,6 +8,8 @@ public class CharacterHealth : MonoBehaviour
     [SerializeField] private Vector3 healthBarOffset = new Vector3(0f, 1f, 0f);
     [SerializeField] private int maxHealth = 100;
 
+    public GameOverScreen GameOverScreen;
+
     public HealthSystem healthSystem;
 
     private void Start()

@@ -21,13 +21,69 @@ namespace PlayFab.AdminModels
         public string TaskInstanceId;
     }
 
+    /// <summary>
+    /// The work to be performed on each entity which can only be of one type.
+    /// </summary>
+    [Serializable]
+    public class Action : PlayFabBaseModel
+    {
+        /// <summary>
+        /// Action content to add inventory item v2
+        /// </summary>
+        public AddInventoryItemV2Content AddInventoryItemV2Content;
+        /// <summary>
+        /// Action content to ban player
+        /// </summary>
+        public BanPlayerContent BanPlayerContent;
+        /// <summary>
+        /// Action content to delete inventory item v2
+        /// </summary>
+        public DeleteInventoryItemV2Content DeleteInventoryItemV2Content;
+        /// <summary>
+        /// Action content to delete player
+        /// </summary>
+        public DeletePlayerContent DeletePlayerContent;
+        /// <summary>
+        /// Action content to execute cloud script
+        /// </summary>
+        public ExecuteCloudScriptContent ExecuteCloudScriptContent;
+        /// <summary>
+        /// Action content to execute azure function
+        /// </summary>
+        public ExecuteFunctionContent ExecuteFunctionContent;
+        /// <summary>
+        /// Action content to grant item
+        /// </summary>
+        public GrantItemContent GrantItemContent;
+        /// <summary>
+        /// Action content to grant virtual currency
+        /// </summary>
+        public GrantVirtualCurrencyContent GrantVirtualCurrencyContent;
+        /// <summary>
+        /// Action content to increment player statistic
+        /// </summary>
+        public IncrementPlayerStatisticContent IncrementPlayerStatisticContent;
+        /// <summary>
+        /// Action content to send push notification
+        /// </summary>
+        public PushNotificationContent PushNotificationContent;
+        /// <summary>
+        /// Action content to send email
+        /// </summary>
+        public SendEmailContent SendEmailContent;
+        /// <summary>
+        /// Action content to subtract inventory item v2
+        /// </summary>
+        public SubtractInventoryItemV2Content SubtractInventoryItemV2Content;
+    }
+
     [Serializable]
     public class ActionsOnPlayersInSegmentTaskParameter : PlayFabBaseModel
     {
         /// <summary>
-        /// ID of the action to perform on each player in segment.
+        /// List of actions to perform on each player in a segment. Each action object can contain only one action type.
         /// </summary>
-        public string ActionId;
+        public List<Action> Actions;
         /// <summary>
         /// ID of the segment to perform actions on.
         /// </summary>
@@ -136,6 +192,31 @@ namespace PlayFab.AdminModels
         /// Campaign comparison.
         /// </summary>
         public SegmentFilterComparison? Comparison;
+    }
+
+    [Serializable]
+    public class AddInventoryItemV2Content : PlayFabBaseModel
+    {
+        /// <summary>
+        /// Amount of the item to be granted to a player
+        /// </summary>
+        public int? Amount;
+        /// <summary>
+        /// The collection id for where the item will be granted in the player inventory
+        /// </summary>
+        public string CollectionId;
+        /// <summary>
+        /// The duration in seconds of the subscription to be granted to a player
+        /// </summary>
+        public int? DurationInSeconds;
+        /// <summary>
+        /// The id of item to be granted to the player
+        /// </summary>
+        public string ItemId;
+        /// <summary>
+        /// The stack id for where the item will be granted in the player inventory
+        /// </summary>
+        public string StackId;
     }
 
     [Serializable]
@@ -314,6 +395,19 @@ namespace PlayFab.AdminModels
         /// The reason why this ban was applied.
         /// </summary>
         public string Reason;
+    }
+
+    [Serializable]
+    public class BanPlayerContent : PlayFabBaseModel
+    {
+        /// <summary>
+        /// Duration(in hours) to ban a player. If not provided, the player will be banned permanently.
+        /// </summary>
+        public int? BanDurationHours;
+        /// <summary>
+        /// Reason to ban a player
+        /// </summary>
+        public string BanReason;
     }
 
     [Serializable]
@@ -1124,6 +1218,10 @@ namespace PlayFab.AdminModels
         /// Manually specified information for an OpenID Connect issuer.
         /// </summary>
         public OpenIdIssuerInformation IssuerInformation;
+        /// <summary>
+        /// Override the issuer name for user indexing and lookup.
+        /// </summary>
+        public string IssuerOverride;
     }
 
     /// <summary>
@@ -1401,6 +1499,23 @@ namespace PlayFab.AdminModels
         public string Key;
     }
 
+    [Serializable]
+    public class DeleteInventoryItemV2Content : PlayFabBaseModel
+    {
+        /// <summary>
+        /// The collection id for where the item will be removed from the player inventory
+        /// </summary>
+        public string CollectionId;
+        /// <summary>
+        /// The id of item to be removed from the player
+        /// </summary>
+        public string ItemId;
+        /// <summary>
+        /// The stack id for where the item will be removed from the player inventory
+        /// </summary>
+        public string StackId;
+    }
+
     /// <summary>
     /// Deletes all data associated with the master player account, including data from all titles the player has played, such
     /// as statistics, custom data, inventory, purchases, virtual currency balances, characters, group memberships, publisher
@@ -1493,6 +1608,11 @@ namespace PlayFab.AdminModels
         /// unique name of the connection
         /// </summary>
         public string ConnectionId;
+    }
+
+    [Serializable]
+    public class DeletePlayerContent : PlayFabBaseModel
+    {
     }
 
     /// <summary>
@@ -1711,6 +1831,23 @@ namespace PlayFab.AdminModels
     }
 
     [Serializable]
+    public class ExecuteCloudScriptContent : PlayFabBaseModel
+    {
+        /// <summary>
+        /// Arguments(JSON) to be passed into the cloudscript method
+        /// </summary>
+        public string CloudScriptMethodArguments;
+        /// <summary>
+        /// Cloudscript method name
+        /// </summary>
+        public string CloudScriptMethodName;
+        /// <summary>
+        /// Publish cloudscript results as playstream event
+        /// </summary>
+        public bool PublishResultsToPlayStream;
+    }
+
+    [Serializable]
     public class ExecuteCloudScriptResult : PlayFabBaseModel
     {
         /// <summary>
@@ -1780,6 +1917,23 @@ namespace PlayFab.AdminModels
         /// Cloud script function parameter json text.
         /// </summary>
         public string FunctionParameterJson;
+    }
+
+    [Serializable]
+    public class ExecuteFunctionContent : PlayFabBaseModel
+    {
+        /// <summary>
+        /// Arguments(JSON) to be passed into the cloudscript azure function
+        /// </summary>
+        public string CloudScriptFunctionArguments;
+        /// <summary>
+        /// Cloudscript azure function name
+        /// </summary>
+        public string CloudScriptFunctionName;
+        /// <summary>
+        /// Publish results from executing the azure function as playstream event
+        /// </summary>
+        public bool PublishResultsToPlayStream;
     }
 
     /// <summary>
@@ -2412,6 +2566,8 @@ namespace PlayFab.AdminModels
         InvalidServiceConfiguration,
         InvalidNamespaceMismatch,
         LeaderboardColumnLengthMismatch,
+        InvalidStatisticScore,
+        LeaderboardColumnsNotSpecified,
         MatchmakingEntityInvalid,
         MatchmakingPlayerAttributesInvalid,
         MatchmakingQueueNotFound,
@@ -2556,6 +2712,12 @@ namespace PlayFab.AdminModels
         LobbyNewOwnerMustBeConnected,
         LobbyCurrentOwnerStillConnected,
         LobbyMemberIsNotOwner,
+        LobbyServerMismatch,
+        LobbyServerNotFound,
+        LobbyDifferentServerAlreadyJoined,
+        LobbyServerAlreadyJoined,
+        LobbyIsNotClientOwned,
+        LobbyDoesNotUseConnections,
         EventSamplingInvalidRatio,
         EventSamplingInvalidEventNamespace,
         EventSamplingInvalidEventName,
@@ -2579,6 +2741,7 @@ namespace PlayFab.AdminModels
         EventSinkTenantNotFound,
         EventSinkAadNotFound,
         EventSinkDatabaseNotFound,
+        EventSinkTitleUnauthorized,
         OperationCanceled,
         InvalidDisplayNameRandomSuffixLength,
         AllowNonUniquePlayerDisplayNamesDisableNotAllowed,
@@ -2598,7 +2761,10 @@ namespace PlayFab.AdminModels
         PlayerCustomPropertiesDuplicatePropertyName,
         PlayerCustomPropertiesPropertyDoesNotExist,
         AddonAlreadyExists,
-        AddonDoesntExist
+        AddonDoesntExist,
+        CopilotDisabled,
+        CopilotInvalidRequest,
+        TrueSkillUnauthorized
     }
 
     [Serializable]
@@ -3549,6 +3715,23 @@ namespace PlayFab.AdminModels
     }
 
     [Serializable]
+    public class GrantItemContent : PlayFabBaseModel
+    {
+        /// <summary>
+        /// The catalog version of the item to be granted to the player
+        /// </summary>
+        public string CatalogVersion;
+        /// <summary>
+        /// The id of item to be granted to the player
+        /// </summary>
+        public string ItemId;
+        /// <summary>
+        /// Quantity of the item to be granted to a player
+        /// </summary>
+        public int ItemQuantity;
+    }
+
+    [Serializable]
     public class GrantItemSegmentAction : PlayFabBaseModel
     {
         /// <summary>
@@ -3601,6 +3784,19 @@ namespace PlayFab.AdminModels
     }
 
     [Serializable]
+    public class GrantVirtualCurrencyContent : PlayFabBaseModel
+    {
+        /// <summary>
+        /// Amount of currency to be granted to a player
+        /// </summary>
+        public int CurrencyAmount;
+        /// <summary>
+        /// Code of the currency to be granted to a player
+        /// </summary>
+        public string CurrencyCode;
+    }
+
+    [Serializable]
     public class GrantVirtualCurrencySegmentAction : PlayFabBaseModel
     {
         /// <summary>
@@ -3641,6 +3837,19 @@ namespace PlayFab.AdminModels
     [Serializable]
     public class IncrementLimitedEditionItemAvailabilityResult : PlayFabResultCommon
     {
+    }
+
+    [Serializable]
+    public class IncrementPlayerStatisticContent : PlayFabBaseModel
+    {
+        /// <summary>
+        /// Amount(in whole number) to increase the player statistic by
+        /// </summary>
+        public int StatisticChangeBy;
+        /// <summary>
+        /// Name of the player statistic to be incremented
+        /// </summary>
+        public string StatisticName;
     }
 
     [Serializable]
@@ -4096,9 +4305,17 @@ namespace PlayFab.AdminModels
         /// </summary>
         public bool DiscoverConfiguration;
         /// <summary>
+        /// Ignore 'nonce' claim in identity tokens.
+        /// </summary>
+        public bool? IgnoreNonce;
+        /// <summary>
         /// Information for an OpenID Connect provider.
         /// </summary>
         public OpenIdIssuerInformation IssuerInformation;
+        /// <summary>
+        /// Override the issuer name for user indexing and lookup.
+        /// </summary>
+        public string IssuerOverride;
     }
 
     [Serializable]
@@ -4568,6 +4785,23 @@ namespace PlayFab.AdminModels
         /// version of the statistic
         /// </summary>
         public uint Version;
+    }
+
+    [Serializable]
+    public class PushNotificationContent : PlayFabBaseModel
+    {
+        /// <summary>
+        /// Text of message to send.
+        /// </summary>
+        public string Message;
+        /// <summary>
+        /// Id of the push notification template.
+        /// </summary>
+        public string PushNotificationTemplateId;
+        /// <summary>
+        /// Subject of message to send (may not be displayed in all platforms)
+        /// </summary>
+        public string Subject;
     }
 
     public enum PushNotificationPlatform
@@ -5741,6 +5975,15 @@ namespace PlayFab.AdminModels
     {
     }
 
+    [Serializable]
+    public class SendEmailContent : PlayFabBaseModel
+    {
+        /// <summary>
+        /// The email template id of the email template to send.
+        /// </summary>
+        public string EmailTemplateId;
+    }
+
     /// <summary>
     /// This API lets developers set overrides for membership expirations, independent of any subscriptions setting it.
     /// </summary>
@@ -6131,6 +6374,31 @@ namespace PlayFab.AdminModels
     }
 
     [Serializable]
+    public class SubtractInventoryItemV2Content : PlayFabBaseModel
+    {
+        /// <summary>
+        /// Amount of the item to removed from the player
+        /// </summary>
+        public int? Amount;
+        /// <summary>
+        /// The collection id for where the item will be removed from the player inventory
+        /// </summary>
+        public string CollectionId;
+        /// <summary>
+        /// The duration in seconds to be removed from the subscription in the players inventory
+        /// </summary>
+        public int? DurationInSeconds;
+        /// <summary>
+        /// The id of item to be removed from the player
+        /// </summary>
+        public string ItemId;
+        /// <summary>
+        /// The stack id for where the item will be removed from the player inventory
+        /// </summary>
+        public string StackId;
+    }
+
+    [Serializable]
     public class SubtractUserVirtualCurrencyRequest : PlayFabRequestCommon
     {
         /// <summary>
@@ -6403,6 +6671,10 @@ namespace PlayFab.AdminModels
         /// </summary>
         public string ConnectionId;
         /// <summary>
+        /// Ignore 'nonce' claim in identity tokens.
+        /// </summary>
+        public bool? IgnoreNonce;
+        /// <summary>
         /// The issuer URL or discovery document URL to read issuer information from
         /// </summary>
         public string IssuerDiscoveryUrl;
@@ -6410,6 +6682,10 @@ namespace PlayFab.AdminModels
         /// Manually specified information for an OpenID Connect issuer.
         /// </summary>
         public OpenIdIssuerInformation IssuerInformation;
+        /// <summary>
+        /// Override the issuer name for user indexing and lookup.
+        /// </summary>
+        public string IssuerOverride;
     }
 
     /// <summary>

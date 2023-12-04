@@ -4,7 +4,13 @@ using UnityEngine.SceneManagement;
 
 public class GameOverScreen : MonoBehaviour
 {
+    [Header("Points")]
     public TMP_Text pointsText;
+    public PlayfabManager PlayfabManager;
+
+    [Header("Leaderboard and Game Over Screen Switch")]
+    public GameObject GameOver;
+    public GameObject Leaderboard;
 
     public void Setup(int score) {
         gameObject.SetActive(true);
@@ -16,6 +22,13 @@ public class GameOverScreen : MonoBehaviour
     }
 
     public void LeaderboardButton() {
+        PlayfabManager.GetLeaderboard();
+        GameOver.SetActive(false);
+        Leaderboard.SetActive(true);
+    }
 
+    public void BackButton() {
+        GameOver.SetActive(true);
+        Leaderboard.SetActive(false);
     }
 }

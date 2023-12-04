@@ -44168,7 +44168,7 @@ GameObject:
   - component: {fileID: 575346944}
   - component: {fileID: 575346943}
   m_Layer: 5
-  m_Name: Restart (1)
+  m_Name: LeaderboardButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44237,7 +44237,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 575346944}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1574481894}
+        m_TargetAssemblyTypeName: GameOverScreen, Assembly-CSharp
+        m_MethodName: LeaderboardButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &575346944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45822,7 +45834,7 @@ GameObject:
   - component: {fileID: 1301458277}
   - component: {fileID: 1301458276}
   m_Layer: 5
-  m_Name: Restart
+  m_Name: RestartButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45891,7 +45903,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1301458277}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1574481894}
+        m_TargetAssemblyTypeName: GameOverScreen, Assembly-CSharp
+        m_MethodName: RestartButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1301458277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46689,7 +46713,7 @@ GameObject:
   - component: {fileID: 1574481892}
   - component: {fileID: 1574481894}
   m_Layer: 5
-  m_Name: Background
+  m_Name: BackgroundCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47764,7 +47788,7 @@ GameObject:
   - component: {fileID: 1825907336}
   - component: {fileID: 1825907335}
   m_Layer: 5
-  m_Name: GameOver
+  m_Name: GameOverTMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49624,7 +49648,7 @@ GameObject:
   - component: {fileID: 1981831861}
   - component: {fileID: 1981831860}
   m_Layer: 5
-  m_Name: Points
+  m_Name: PointsTMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

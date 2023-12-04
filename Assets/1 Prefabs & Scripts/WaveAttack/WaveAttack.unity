@@ -46542,6 +46542,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Todd
       objectReference: {fileID: 0}
+    - target: {fileID: 1722422641246284513, guid: f87548fe8336dd9489ea97c9eaa2f7a4, type: 3}
+      propertyPath: ScoreManager
+      value: 
+      objectReference: {fileID: 1222875037}
+    - target: {fileID: 1722422641246284513, guid: f87548fe8336dd9489ea97c9eaa2f7a4, type: 3}
+      propertyPath: GameOverScreen
+      value: 
+      objectReference: {fileID: 1574481894}
     - target: {fileID: 5128462223807827732, guid: f87548fe8336dd9489ea97c9eaa2f7a4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -46686,7 +46694,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1574481891
 RectTransform:
   m_ObjectHideFlags: 0

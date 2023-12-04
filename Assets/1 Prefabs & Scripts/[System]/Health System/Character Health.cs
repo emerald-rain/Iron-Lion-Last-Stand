@@ -9,6 +9,7 @@ public class CharacterHealth : MonoBehaviour
     [SerializeField] private int maxHealth = 100;
 
     public GameOverScreen GameOverScreen;
+    public ScoreManager ScoreManager;
 
     public HealthSystem healthSystem;
 
@@ -32,6 +33,7 @@ public class CharacterHealth : MonoBehaviour
 
         if (healthSystem.GetHealth() <= 0) 
         {
+            GameOverScreen.Setup(ScoreManager.GetScore());
             Destroy(gameObject);
         }
     }

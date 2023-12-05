@@ -8,6 +8,8 @@ public class CharacterHealth : MonoBehaviour
     [SerializeField] private Vector3 healthBarOffset = new Vector3(0f, 1f, 0f);
     [SerializeField] private int maxHealth = 100;
 
+    public GameManager GameManager;
+
     public HealthSystem healthSystem;
 
     private void Start()
@@ -31,6 +33,7 @@ public class CharacterHealth : MonoBehaviour
         if (healthSystem.GetHealth() <= 0) 
         {
             Destroy(gameObject);
+            GameManager.GameOver();
         }
     }
 }

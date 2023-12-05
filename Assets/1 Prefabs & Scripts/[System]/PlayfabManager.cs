@@ -13,57 +13,69 @@ public class PlayfabManager : MonoBehaviour
     public TMP_InputField emailInput;
     public TMP_InputField passwordInput;
 
+    [Header("Register UI")]
+    public TMP_InputField regEmailInput;
+    public TMP_InputField regUsernameInput;
+    public TMP_InputField regPasswordInput;
+
+    [Header("Registration and Login game objects")]
+    public GameObject logInGameObject;
+    public GameObject registrationGameObject;
+
     [Header("Leaderboard")]
     public GameObject rowPrefab;
     public Transform rowsParent;
 
-    public void RegisterButton()
-    {
-        if (passwordInput.text.Length < 6)
-        {
+    // New account registation
+    public void RegisterButton() {
+        // Check if password is shorter than 6 characters.
+        if (regPasswordInput.text.Length < 6) {
             messageText.text = "Password is too short.";
             return;
         }
 
-        var request = new RegisterPlayFabUserRequest
-        {
-            Email = emailInput.text,
-            Password = passwordInput.text,
+        // Registration request to Playfab
+        var request = new RegisterPlayFabUserRequest {
+            Email = regEmailInput.text,
+            DisplayName = regUsernameInput.text,
+            Password = regPasswordInput.text,
             RequireBothUsernameAndEmail = false
         };
-
         PlayFabClientAPI.RegisterPlayFabUser(request, OnRegisterSuccess, OnError);
     }
 
-    public void LoginButton()
-    {
-        var request = new LoginWithEmailAddressRequest
-        {
+    public void BackToLogInButton() {
+        registrationGameObject.SetActive(false);
+        logInGameObject.SetActive(true);
+    }
+
+    public void RegisterAccountButton() {
+        registrationGameObject.SetActive(true);
+        logInGameObject.SetActive(false);
+    }
+
+    // Login process
+    public void LoginButton() {
+        var request = new LoginWithEmailAddressRequest {
             Email = emailInput.text,
             Password = passwordInput.text,
         };
-
         PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnError);
     }
 
-    void OnRegisterSuccess(RegisterPlayFabUserResult result)
-    {
-        messageText.text = "Register and logged in!";
-
-        SceneManager.LoadScene("WaveAttack");
+    void OnRegisterSuccess(RegisterPlayFabUserResult result) {
+        messageText.text = "Successfull Registration!";
+        BackToLogInButton();
     }
 
-    void OnError(PlayFabError error)
-    {
+    void OnError(PlayFabError error) {
         messageText.text = error.ErrorMessage;
         Debug.Log(error.GenerateErrorReport());
     }
 
-    void OnLoginSuccess(LoginResult result)
-    {
+    void OnLoginSuccess(LoginResult result) {
         messageText.text = "Logged in!";
         Debug.Log("Successfull Login!");
-
         SceneManager.LoadScene("WaveAttack");
     }
 
@@ -100,7 +112,7 @@ public class PlayfabManager : MonoBehaviour
 
         foreach (var item in result.Leaderboard) {
             GameObject newGo = Instantiate(rowPrefab, rowsParent);
-            TextMeshProUGUI[] texts = newGo.GetComponentsInChildren<TextMeshProUGUI>(); // Use TextMeshProUGUI instead of Text
+            TextMeshProUGUI[] texts = newGo.GetComponentsInChildren<TextMeshProUGUI>();
 
             texts[0].text = (item.Position + 1).ToString();
             texts[1].text = item.PlayFabId;
@@ -110,9 +122,8 @@ public class PlayfabManager : MonoBehaviour
         }
     }
 
-    void Start() { // Auto Playfab Login
-        string currentScene = SceneManager.GetActiveScene().name;
-        if (currentScene == "WaveAttack") {
+    void Start() { // Auto LogIn
+        if (!string.IsNullOrEmpty(regEmailInput.text) && Application.isEditor && SceneManager.GetActiveScene().name == "WaveAttack") {
             var request = new LoginWithEmailAddressRequest {
                 Email = "admin@admin.com",
                 Password = "admin6",
@@ -120,4 +131,5 @@ public class PlayfabManager : MonoBehaviour
             PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnError);
         }
     }
+
 }

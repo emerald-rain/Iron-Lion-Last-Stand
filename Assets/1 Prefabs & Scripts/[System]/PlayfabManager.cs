@@ -115,7 +115,7 @@ public class PlayfabManager : MonoBehaviour
             TextMeshProUGUI[] texts = newGo.GetComponentsInChildren<TextMeshProUGUI>();
 
             texts[0].text = (item.Position + 1).ToString();
-            texts[1].text = item.PlayFabId;
+            texts[1].text = item.DisplayName;
             texts[2].text = item.StatValue.ToString();
 
             Debug.Log(item.Position + " " + item.PlayFabId + " " + item.StatValue);
@@ -123,7 +123,7 @@ public class PlayfabManager : MonoBehaviour
     }
 
     void Start() { // Auto LogIn
-        if (!string.IsNullOrEmpty(regEmailInput.text) && Application.isEditor && SceneManager.GetActiveScene().name == "WaveAttack") {
+        if (Application.isEditor && SceneManager.GetActiveScene().name == "WaveAttack") {
             var request = new LoginWithEmailAddressRequest {
                 Email = "admin@admin.com",
                 Password = "admin6",

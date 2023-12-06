@@ -44954,7 +44954,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1105221130
 RectTransform:
   m_ObjectHideFlags: 0
@@ -45146,7 +45146,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.000038146973, y: -27.464996}
+  m_AnchoredPosition: {x: 0.000038146973, y: -27.464966}
   m_SizeDelta: {x: 672.6405, y: 54.93}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1266074554
@@ -50317,6 +50317,11 @@ MonoBehaviour:
   messageText: {fileID: 0}
   emailInput: {fileID: 0}
   passwordInput: {fileID: 0}
+  regEmailInput: {fileID: 0}
+  regUsernameInput: {fileID: 0}
+  regPasswordInput: {fileID: 0}
+  logInGameObject: {fileID: 0}
+  registrationGameObject: {fileID: 0}
   rowPrefab: {fileID: 6754951342847748569, guid: c6d472ccee6b0ab4cab2a520d440a648, type: 3}
   rowsParent: {fileID: 2075997048}
 --- !u!114 &1992137206

@@ -123,7 +123,7 @@ public class PlayfabManager : MonoBehaviour
     }
 
     void Start() { // Auto LogIn
-        if (!string.IsNullOrEmpty(regEmailInput.text) && Application.isEditor && SceneManager.GetActiveScene().name == "WaveAttack") {
+        if (Application.isEditor && SceneManager.GetActiveScene().name == "WaveAttack") {
             var request = new LoginWithEmailAddressRequest {
                 Email = "admin@admin.com",
                 Password = "admin6",

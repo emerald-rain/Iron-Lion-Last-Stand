@@ -10,9 +10,12 @@ public class ShootingEnemy : MonoBehaviour
     private NavMeshAgent agent;
     private Animator animator;
     private float nextShotTime;
+    private float creationTime;
 
     private void Start()
     {
+        creationTime = Time.time;
+        
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
 
@@ -27,7 +30,7 @@ public class ShootingEnemy : MonoBehaviour
             agent.SetDestination(target.position);
             UpdateAnimationAndFlip();
             
-        if (target != null && Time.time > nextShotTime && agent.velocity.magnitude < 0.1f)
+        if (target != null && Time.time > nextShotTime && agent.remainingDistance < agent.stoppingDistance && Time.time - creationTime > 3f)
         {
             Vector2 directionToTarget = (target.position - transform.position).normalized;
             float angle = Mathf.Atan2(directionToTarget.y, directionToTarget.x) * Mathf.Rad2Deg;

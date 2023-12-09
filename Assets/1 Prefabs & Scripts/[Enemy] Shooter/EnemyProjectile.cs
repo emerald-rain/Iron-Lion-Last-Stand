@@ -11,15 +11,24 @@ public class EnemyProjectile : MonoBehaviour
 
     private void Start()
     {
-        targetPosition = FindObjectOfType<PlayerMovement>().transform.position;
-        direction = (targetPosition - transform.position).normalized;
-        Destroy(gameObject, 5f);
-        StartCoroutine(EnableCollision());
+        PlayerMovement player = FindObjectOfType<PlayerMovement>();
+        if (player != null)
+        {
+            targetPosition = player.transform.position;
+            direction = (targetPosition - transform.position).normalized;
+
+            // Отримання нового напрямку, щоб куля рухалась у бік цілі
+            Vector3 lookDirection = targetPosition - transform.position;
+            transform.up = lookDirection;
+
+            Destroy(gameObject, 5f);
+            StartCoroutine(EnableCollision());
+        }
     }
 
-    private void Update() 
+    private void Update()
     {
-        transform.position += direction * speed * Time.deltaTime;
+        transform.position += transform.up * speed * Time.deltaTime;
     }
 
     IEnumerator EnableCollision()
@@ -30,7 +39,7 @@ public class EnemyProjectile : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (!canCollide) return;  // Игнорируем столкновения, пока canCollide не станет true
+        if (!canCollide) return;
 
         if (other.CompareTag("Player"))
         {
@@ -39,10 +48,9 @@ public class EnemyProjectile : MonoBehaviour
             if (characterHealth != null) characterHealth.TakeDamage(20);
             Destroy(gameObject);
         }
-        else 
+        else
         {
             Destroy(gameObject);
         }
     }
 }
-

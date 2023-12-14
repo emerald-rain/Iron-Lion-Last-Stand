@@ -6,6 +6,7 @@ public class ShootingEnemy : MonoBehaviour
     [SerializeField] private Transform target;
     [SerializeField] private GameObject projectile;
     [SerializeField] private float timeBetweenShots;
+    [SerializeField] private SoundEffectsPlayer soundEffectsPlayer;
     
     private NavMeshAgent agent;
     private Animator animator;
@@ -35,6 +36,7 @@ public class ShootingEnemy : MonoBehaviour
             Vector2 directionToTarget = (target.position - transform.position).normalized;
             float angle = Mathf.Atan2(directionToTarget.y, directionToTarget.x) * Mathf.Rad2Deg;
             Instantiate(projectile, transform.position, Quaternion.Euler(0, 0, angle));
+            soundEffectsPlayer.PlayRandom();
             nextShotTime = Time.time + timeBetweenShots;
         }
 

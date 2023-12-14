@@ -34,9 +34,8 @@ public class SoundEffectsPlayer : MonoBehaviour
 
     private AudioClip GetNextClip()
     {
-        AudioClip clipToPlay = audioClips[currentIndex];
-        currentIndex = (currentIndex + 1) % audioClips.Length;
-        return clipToPlay;
+        int randomIndex = Random.Range(0, audioClips.Length);
+        return audioClips[randomIndex];
     }
 }
 

@@ -44599,6 +44599,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 687dfeb5c0ad5be44996d88789f8b89e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  volume: 0.6
   audioSources:
   - {fileID: 709219118}
   - {fileID: 709219123}
@@ -48489,8 +48490,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 687dfeb5c0ad5be44996d88789f8b89e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioSources: []
-  audioClips: []
+  volume: 0.3
+  audioSources:
+  - {fileID: 1658317177}
+  audioClips:
+  - {fileID: 8300000, guid: 3847f08698f8756488f54d20bda58b25, type: 3}
+  - {fileID: 8300000, guid: e0c51bd9765f1864aac694aa2bae88c8, type: 3}
+  - {fileID: 8300000, guid: 8265a2db914498544a97695d876fbe7a, type: 3}
+  - {fileID: 8300000, guid: 903e716f29e627342a09ef8fd3ccefdc, type: 3}
 --- !u!82 &1658317177
 AudioSource:
   m_ObjectHideFlags: 0

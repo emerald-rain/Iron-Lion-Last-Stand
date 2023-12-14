@@ -4,20 +4,31 @@ using UnityEngine;
 
 public class SoundEffectsPlayer : MonoBehaviour
 {
-    public AudioSource src;
-    public AudioClip[] grassSounds;
+    public AudioSource[] audioSources; // Массив источников звука
+    public AudioClip[] audioClips; // Массив звуков для воспроизведения
 
-    void PlayRandomGrassSound() {
-        // Вибираємо випадковий звук з масиву
-        int randomIndex = Random.Range(0, grassSounds.Length);
+    private int currentIndex = 0;
 
-        // Перевірка, чи є AudioSource та звук для відтворення
-        if (src != null && grassSounds[randomIndex] != null)
+    public void PlayRandom()
+    {
+        AudioClip clipToPlay = GetNextClip();
+
+        foreach (AudioSource source in audioSources)
         {
-            // Встановлюємо вибраний звук та відтворюємо його
-            src.clip = grassSounds[randomIndex];
-            src.Play();
-            Debug.Log("Sound played");
+            if (!source.isPlaying)
+            {
+                source.clip = clipToPlay;
+                source.Play();
+                break;
+            }
         }
     }
+
+    private AudioClip GetNextClip()
+    {
+        AudioClip clipToPlay = audioClips[currentIndex];
+        currentIndex = (currentIndex + 1) % audioClips.Length; // Переход к следующему звуку
+        return clipToPlay;
+    }
 }
+

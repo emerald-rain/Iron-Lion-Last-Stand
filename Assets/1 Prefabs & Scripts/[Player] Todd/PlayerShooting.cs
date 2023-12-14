@@ -5,6 +5,7 @@ public class PlayerShooting : MonoBehaviour
     public GameObject bullet;
     public Transform bulletTransform;
     public float timeBetweenFiring;
+    public SoundEffectsPlayer soundEffectsPlayer;
     
     private float timer;
 
@@ -26,6 +27,7 @@ public class PlayerShooting : MonoBehaviour
         if (Input.GetMouseButton(0) && timer > timeBetweenFiring)
         {
             timer = 0;
+            soundEffectsPlayer.PlayRandom();
             Vector3 spawnPosition = bulletTransform.position + bulletTransform.right;
             Instantiate(bullet, spawnPosition, bulletTransform.rotation);
         }

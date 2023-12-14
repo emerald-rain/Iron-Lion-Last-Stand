@@ -4,10 +4,18 @@ using UnityEngine;
 
 public class SoundEffectsPlayer : MonoBehaviour
 {
-    public AudioSource[] audioSources; // Массив источников звука
-    public AudioClip[] audioClips; // Массив звуков для воспроизведения
+    public float volume = 1.0f;
+    public AudioSource[] audioSources;
+    public AudioClip[] audioClips;
 
     private int currentIndex = 0;
+
+    void Start() {
+        foreach (AudioSource source in audioSources)
+        {
+            source.volume = volume;
+        }
+    }
 
     public void PlayRandom()
     {
@@ -27,7 +35,7 @@ public class SoundEffectsPlayer : MonoBehaviour
     private AudioClip GetNextClip()
     {
         AudioClip clipToPlay = audioClips[currentIndex];
-        currentIndex = (currentIndex + 1) % audioClips.Length; // Переход к следующему звуку
+        currentIndex = (currentIndex + 1) % audioClips.Length;
         return clipToPlay;
     }
 }

@@ -6,6 +6,7 @@ public class ChaserEnemy : MonoBehaviour
     [SerializeField] private float explosionPreparation = 0.5f;
     [SerializeField] private float explosionRadius = 3f;
     [SerializeField] private int explosionDamage = 50;
+    [SerializeField] private SoundEffectsPlayer soundEffectsPlayer;
 
     private NavMeshAgent agent; // AI movement agent
     private Animator animator; // animation controller
@@ -52,6 +53,7 @@ public class ChaserEnemy : MonoBehaviour
     }
 
     private void Explode() {
+        soundEffectsPlayer.PlayRandom();
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
 
         foreach (Collider2D collider in colliders){

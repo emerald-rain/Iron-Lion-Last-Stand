@@ -8,8 +8,6 @@ public class SoundEffectsPlayer : MonoBehaviour
     public AudioSource[] audioSources;
     public AudioClip[] audioClips;
 
-    private int currentIndex = 0;
-
     void Start() {
         foreach (AudioSource source in audioSources)
         {

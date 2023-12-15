@@ -51447,7 +51447,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1992137209}
   - component: {fileID: 1992137208}
-  - component: {fileID: 1992137207}
+  - component: {fileID: 1992137210}
   - component: {fileID: 1992137206}
   - component: {fileID: 1992137205}
   m_Layer: 0
@@ -51492,27 +51492,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 1266074554}
---- !u!114 &1992137207
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1992137204}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13918bb21715ec94db6464e025ced0f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  groundTilemap: {fileID: 390123184}
-  enemyPrefabs:
-  - {fileID: 3816676736364502233, guid: 32c5b3652ac71874fa240301e683b0f7, type: 3}
-  - {fileID: 344445916090762764, guid: 12039f41b7fa8d14994e00233e5e851f, type: 3}
-  minDistance: 17
-  maxDistance: 30
-  minSpawnTime: 2
-  maxSpawnTime: 7
-  enemiesToSpawn: 3
 --- !u!114 &1992137208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51543,6 +51522,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1992137210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1992137204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24ea717039c2bda43a1fd8ab522f1f33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundTilemap: {fileID: 390123184}
+  enemyPrefabs:
+  - {fileID: 3816676736364502233, guid: 32c5b3652ac71874fa240301e683b0f7, type: 3}
+  - {fileID: 344445916090762764, guid: 12039f41b7fa8d14994e00233e5e851f, type: 3}
+  enemySpawnCount: 3
+  spawnTimeout: 10
+  minTimeout: 3
 --- !u!1 &2075997047
 GameObject:
   m_ObjectHideFlags: 0

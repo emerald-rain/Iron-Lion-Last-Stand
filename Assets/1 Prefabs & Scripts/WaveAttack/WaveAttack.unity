@@ -51541,6 +51541,7 @@ MonoBehaviour:
   enemySpawnCount: 3
   spawnTimeout: 10
   minTimeout: 3
+  timeoutStep: 0.3
 --- !u!1 &2075997047
 GameObject:
   m_ObjectHideFlags: 0

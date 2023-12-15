@@ -9,9 +9,10 @@ public class WaveAttackGamemode : MonoBehaviour
     [SerializeField] private List<GameObject> enemyPrefabs;
 
     [Header("Enemys spawn logic settings")]
-    [SerializeField] private int enemySpawnCount = 3;
-    [SerializeField] private float spawnTimeout = 10f;
-    [SerializeField] private float minTimeout = 3f;
+    [SerializeField] private int enemySpawnCount;
+    [SerializeField] private float spawnTimeout;
+    [SerializeField] private float timeoutStep;
+    [SerializeField] private float minTimeout;
 
     private Transform playerTransform;
     private float spawnDistance = 20f;
@@ -65,7 +66,7 @@ public class WaveAttackGamemode : MonoBehaviour
 
     public void SetNewTimeout() {
         if (spawnTimeout > minTimeout) {
-            spawnTimeout -= 0.5f; // Уменьшаем время на 0.5с
+            spawnTimeout -= timeoutStep; // Уменьшаем время появления следующией волны
         } else { // Если время достигло минимального значения, устанавливаем его на minTimeout
             spawnTimeout = minTimeout;
         }

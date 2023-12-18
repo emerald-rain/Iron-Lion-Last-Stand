@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using System.Collections.Generic;
+using UnityEngine.AI;
 
 public class WaveAttackGamemode : MonoBehaviour
 {
@@ -37,31 +38,48 @@ public class WaveAttackGamemode : MonoBehaviour
         }
     }
 
-    public void SpawnEnemys() {
-        for (int i = 0; i < enemySpawnCount; i++) {
-            // Выбор случайного префаба из списка
+    public void SpawnEnemys()
+    {
+        for (int i = 0; i < enemySpawnCount; i++)
+        {
             GameObject randomEnemyPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Count)];
 
+            Vector3 randomSpawnPosition = GetRandomNavMeshPosition();
+
+            // Создание врага в выбранной позиции
+            Instantiate(randomEnemyPrefab, randomSpawnPosition, Quaternion.identity);
+        }
+    }
+
+    private Vector3 GetRandomNavMeshPosition()
+    {
+        int attempts = 0;
+        Vector3 randomSpawnPosition = Vector3.zero;
+
+        do
+        {
             // Генерация случайной позиции в диапазоне spawnDistance от игрока
-            Vector3 randomSpawnPosition = playerTransform.position + Random.insideUnitSphere * spawnDistance;
-            randomSpawnPosition.z = 0; // Устанавливаем z-координату (предполагая плоскость)
+            randomSpawnPosition = playerTransform.position + Random.insideUnitSphere * spawnDistance;
+            randomSpawnPosition.z = 0;
 
             // Проверка минимального расстояния между игроком и врагами
             float distanceToPlayer = Vector3.Distance(playerTransform.position, randomSpawnPosition);
-            if (distanceToPlayer < spawnDistance) {
+            if (distanceToPlayer < spawnDistance)
+            {
                 randomSpawnPosition = playerTransform.position + (randomSpawnPosition - playerTransform.position).normalized * spawnDistance;
             }
 
-            // Получение ячейки тайлмапа в этой позиции
-            Vector3Int spawnCell = groundTilemap.WorldToCell(randomSpawnPosition);
-
-            // Проверка, что ячейка находится на тайлмапе и пуста
-            if (groundTilemap.HasTile(spawnCell))
+            // Проверка, что точка находится на NavMesh
+            UnityEngine.AI.NavMeshHit hit;
+            if (UnityEngine.AI.NavMesh.SamplePosition(randomSpawnPosition, out hit, 1.0f, UnityEngine.AI.NavMesh.AllAreas))
             {
-                // Создание врага в выбранной позиции
-                Instantiate(randomEnemyPrefab, randomSpawnPosition, Quaternion.identity);
+                break; // Выход из цикла, если точка находится на NavMesh
             }
-        }
+
+            attempts++;
+        } while (attempts < 30); // Ограничение на количество попыток для избежания бесконечного цикла
+
+        return randomSpawnPosition;
     }
 
     public void SetNewTimeout() {
@@ -70,7 +88,7 @@ public class WaveAttackGamemode : MonoBehaviour
         } else { // Если время достигло минимального значения, устанавливаем его на minTimeout
             spawnTimeout = minTimeout;
         }
-}
+    }
 
     #if UNITY_EDITOR
     private void OnDrawGizmosSelected()

@@ -3,8 +3,8 @@ using UnityEngine;
 public class SpawnPrefabOnScroll : MonoBehaviour
 {
     [SerializeField] private GameObject prefabToSpawn;
-    [SerializeField] private float minDistance = 5.0f;
-    [SerializeField] private float maxDistance = 10.0f;
+    [SerializeField] private float minDistance = 20f;
+    [SerializeField] private float maxDistance = 20f;
     private Transform playerTransform;
 
     private void Start() {

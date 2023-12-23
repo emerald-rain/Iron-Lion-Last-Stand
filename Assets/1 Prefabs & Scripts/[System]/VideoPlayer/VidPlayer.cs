@@ -33,6 +33,10 @@ public class VidPlayer : MonoBehaviour
     }
 
     private void SwitchSceneOnEnd(VideoPlayer vp) {
-        SceneManager.LoadScene("WaveAttack");
+        if (SceneManager.GetActiveScene().name == "WaveAttack") {
+            gameObject.SetActive(false);
+        } else {
+            SceneManager.LoadScene("WaveAttack");
+        }
     }
 }

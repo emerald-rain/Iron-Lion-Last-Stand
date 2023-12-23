@@ -22,6 +22,9 @@ public class PlayfabManager : MonoBehaviour
     public GameObject logInGameObject;
     public GameObject registrationGameObject;
 
+    [Header("Video Player")]
+    public VidPlayer vidPlayer;
+
     [Header("Leaderboard")]
     public GameObject rowPrefab;
     public Transform rowsParent;
@@ -76,7 +79,7 @@ public class PlayfabManager : MonoBehaviour
     void OnLoginSuccess(LoginResult result) {
         messageText.text = "Logged in!";
         Debug.Log("Successfull Login!");
-        SceneManager.LoadScene("WaveAttack");
+        vidPlayer.PlayVideo();
     }
 
     // LEADERBOARD 

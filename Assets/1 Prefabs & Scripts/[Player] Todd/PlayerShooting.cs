@@ -1,13 +1,24 @@
 using UnityEngine;
+using System.Collections;
 
 public class PlayerShooting : MonoBehaviour
 {
+    [Header("Bullet Settings")]
     public GameObject bullet;
     public Transform bulletTransform;
+
+    [Header("Weapon Settings")]
     public float timeBetweenFiring;
     public SoundEffectsPlayer soundEffectsPlayer;
-    
+
+    [Header("Reaload System")]
+    public float reloadTime;
+    public int shotsBeforeReload;
+
     private float timer;
+    private int shotsFired;
+
+    private bool isReloading = false;
 
     void Update()
     {
@@ -22,7 +33,10 @@ public class PlayerShooting : MonoBehaviour
         scale.y = isMouseToLeft ? -1 : 1;
         transform.localScale = scale;
 
-        // Fire bullet
+        // If reloading is in progress, stop executing further
+        if (isReloading) { return; }
+
+        // Fire bullet [LMB]
         timer += Time.deltaTime;
         if (Input.GetMouseButton(0) && timer > timeBetweenFiring)
         {
@@ -30,14 +44,26 @@ public class PlayerShooting : MonoBehaviour
             soundEffectsPlayer.PlayRandom();
             Vector3 spawnPosition = bulletTransform.position + bulletTransform.right;
             Instantiate(bullet, spawnPosition, bulletTransform.rotation);
+            shotsFired++;
+
+            // Check for reload
+            if (shotsFired >= shotsBeforeReload)
+            {
+                StartCoroutine(Reload());
+            }
+        }
+
+        // Reload now [R]
+        if (Input.GetKeyDown(KeyCode.R) && shotsFired > 0 && !isReloading) {
+            StartCoroutine(Reload());
         }
     }
 
-    void OnDrawGizmos()
+    IEnumerator Reload()
     {
-        // Draw a line from bullet spawn point to mouse position
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(bulletTransform.position, new Vector3(mousePos.x, mousePos.y, bulletTransform.position.z));
+        isReloading = true;
+        yield return new WaitForSeconds(reloadTime);
+        shotsFired = 0;
+        isReloading = false;
     }
 }

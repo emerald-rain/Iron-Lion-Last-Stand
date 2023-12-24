@@ -10,7 +10,8 @@ public class VidPlayer : MonoBehaviour
     [SerializeField] string videoFilename;
     [SerializeField] VideoPlayer videoPlayer; 
     [SerializeField] RawImage rawImage;
-
+    [SerializeField] SceneTransition sceneTransition;
+ 
     public void PlayVideo() {
         VideoPlayer videoPlayer = GetComponent<VideoPlayer>();
         if (videoPlayer) {
@@ -42,7 +43,7 @@ public class VidPlayer : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "WaveAttack") {
             gameObject.SetActive(false);
         } else {
-            SceneManager.LoadScene("WaveAttack");
+            sceneTransition.LoadScene("WaveAttack");
         }
     }
 }

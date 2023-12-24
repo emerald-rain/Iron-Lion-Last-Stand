@@ -24,6 +24,12 @@ public class VidPlayer : MonoBehaviour
         }
     }
 
+    public void SkipVideo() {
+        if (videoPlayer.isPlaying) {
+            videoPlayer.Stop(); SwitchSceneOnEnd(videoPlayer);
+        }
+    }
+
     private void ToggleSetActive() {
         if (gameObject.activeSelf) {
             gameObject.SetActive(false);

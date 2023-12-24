@@ -7,10 +7,12 @@ public class GameManager : MonoBehaviour
     public GameOverScreen GameOverScreen;
     public ScoreManager ScoreManager;
     public PlayfabManager PlayfabManager;
+    public VidPlayer vidPlayer;
 
     public void GameOver() { 
-        int score = ScoreManager.GetScore();
+        vidPlayer.PlayVideo();
 
+        int score = ScoreManager.GetScore();
         GameOverScreen.Setup(score);
         PlayfabManager.SendLeaderboard(score); 
     }

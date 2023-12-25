@@ -13,16 +13,23 @@ public class PlayerShooting : MonoBehaviour
 
     [Header("Reaload System")]
     public float reloadTime;
-    public int shotsBeforeReload;
+    public int maxCharge;
+
+    [Header("Reload System")]
+    public Transform ammoDisplay;
+    public GameObject ammoPrefab;
 
     private float timer;
     private int shotsFired;
-
     private bool isReloading = false;
 
+    void Start() {
+        UpdateAmmoDisplay();
+    }
+    
     void Update()
     {
-        // Rotate gun towards mouse
+        // Rotate gun towards mouse.
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         float rotZ = Mathf.Atan2(mousePos.y - transform.position.y, mousePos.x - transform.position.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, rotZ);
@@ -32,6 +39,8 @@ public class PlayerShooting : MonoBehaviour
         Vector3 scale = transform.localScale;
         scale.y = isMouseToLeft ? -1 : 1;
         transform.localScale = scale;
+
+        UpdateAmmoDisplay();
 
         // If reloading is in progress, stop executing further
         if (isReloading) { return; }
@@ -47,8 +56,7 @@ public class PlayerShooting : MonoBehaviour
             shotsFired++;
 
             // Check for reload
-            if (shotsFired >= shotsBeforeReload)
-            {
+            if (shotsFired >= maxCharge) {
                 StartCoroutine(Reload());
             }
         }
@@ -65,5 +73,23 @@ public class PlayerShooting : MonoBehaviour
         yield return new WaitForSeconds(reloadTime);
         shotsFired = 0;
         isReloading = false;
+
+        // Обновить отображение патронов после перезарядки
+        UpdateAmmoDisplay();
+    }
+    
+    void UpdateAmmoDisplay()
+    {
+        // Удалить все текущие объекты в отображении патронов
+        foreach (Transform child in ammoDisplay)
+        {
+            Destroy(child.gameObject);
+        }
+
+        // Создать новые объекты патронов в зависимости от заряда оружия
+        for (int i = 0; i < maxCharge - shotsFired; i++)
+        {
+            Instantiate(ammoPrefab, ammoDisplay);
+        }
     }
 }

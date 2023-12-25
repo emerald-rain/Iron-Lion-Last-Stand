@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/1 Prefabs & Scripts/Auth 1.unity
+    path: Assets/1 Prefabs & Scripts/Auth/Auth 1.unity
     guid: 6327e39a11425a64db45fd11c90a5c61
   - enabled: 1
     path: Assets/1 Prefabs & Scripts/WaveAttack/WaveAttack.unity

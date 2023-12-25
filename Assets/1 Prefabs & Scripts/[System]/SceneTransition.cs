@@ -29,6 +29,8 @@ public class SceneTransition : MonoBehaviour
             transitionImage.color = new Color(0, 0, 0, t);
             yield return null;
         }
+        
+        transitionImage.gameObject.SetActive(false);
     }
 
     IEnumerator FadeOut(string sceneName)

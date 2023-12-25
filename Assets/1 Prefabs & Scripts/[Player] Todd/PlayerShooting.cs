@@ -18,6 +18,7 @@ public class PlayerShooting : MonoBehaviour
     [Header("Reload System")]
     public Transform ammoDisplay;
     public GameObject ammoPrefab;
+    public SoundEffectsPlayer soundEffectsPlayerReload;
 
     private float timer;
     private int shotsFired;
@@ -79,6 +80,7 @@ public class PlayerShooting : MonoBehaviour
     IEnumerator Reload()
     {
         isReloading = true;
+        soundEffectsPlayerReload.PlayRandom();
         yield return new WaitForSeconds(reloadTime);
         shotsFired = 0;
         isReloading = false;

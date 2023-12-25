@@ -11,7 +11,7 @@ public class PlayerShooting : MonoBehaviour
     public float timeBetweenFiring;
     public SoundEffectsPlayer soundEffectsPlayer;
 
-    [Header("Reaload System")]
+    [Header("Reload System")]
     public float reloadTime;
     public int maxCharge;
 
@@ -23,29 +23,35 @@ public class PlayerShooting : MonoBehaviour
     private int shotsFired;
     private bool isReloading = false;
 
-    void Start() {
-        UpdateAmmoDisplay();
-    }
-    
-    void Update()
-    {
-        // Rotate gun towards mouse.
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        float rotZ = Mathf.Atan2(mousePos.y - transform.position.y, mousePos.x - transform.position.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, rotZ);
-
-        // Flip weapon if mouse is to the left of the player
-        bool isMouseToLeft = mousePos.x < transform.position.x;
-        Vector3 scale = transform.localScale;
-        scale.y = isMouseToLeft ? -1 : 1;
-        transform.localScale = scale;
-
-        UpdateAmmoDisplay();
+    void Update() {
+        HandleRotation(); // Rotating the player's weapon around
+        HandleMouseFlip(); // Weapon flip when the character turns
+        UpdateAmmoDisplay(); // Update the ammo indicator
 
         // If reloading is in progress, stop executing further
         if (isReloading) { return; }
 
-        // Fire bullet [LMB]
+        HandleShootingInput();
+        HandleReloadInput();
+    }
+
+    void HandleRotation()
+    {
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        float rotZ = Mathf.Atan2(mousePos.y - transform.position.y, mousePos.x - transform.position.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, 0, rotZ);
+    }
+
+    void HandleMouseFlip()
+    {
+        bool isMouseToLeft = Camera.main.ScreenToWorldPoint(Input.mousePosition).x < transform.position.x;
+        Vector3 scale = transform.localScale;
+        scale.y = isMouseToLeft ? -1 : 1;
+        transform.localScale = scale;
+    }
+
+    void HandleShootingInput()
+    {
         timer += Time.deltaTime;
         if (Input.GetMouseButton(0) && timer > timeBetweenFiring)
         {
@@ -55,14 +61,17 @@ public class PlayerShooting : MonoBehaviour
             Instantiate(bullet, spawnPosition, bulletTransform.rotation);
             shotsFired++;
 
-            // Check for reload
-            if (shotsFired >= maxCharge) {
+            if (shotsFired >= maxCharge)
+            {
                 StartCoroutine(Reload());
             }
         }
+    }
 
-        // Reload now [R]
-        if (Input.GetKeyDown(KeyCode.R) && shotsFired > 0 && !isReloading) {
+    void HandleReloadInput()
+    {
+        if (Input.GetKeyDown(KeyCode.R) && shotsFired > 0 && !isReloading)
+        {
             StartCoroutine(Reload());
         }
     }
@@ -73,20 +82,18 @@ public class PlayerShooting : MonoBehaviour
         yield return new WaitForSeconds(reloadTime);
         shotsFired = 0;
         isReloading = false;
-
-        // Обновить отображение патронов после перезарядки
         UpdateAmmoDisplay();
     }
-    
+
     void UpdateAmmoDisplay()
     {
-        // Удалить все текущие объекты в отображении патронов
+        // Clear existing ammo display objects
         foreach (Transform child in ammoDisplay)
         {
             Destroy(child.gameObject);
         }
 
-        // Создать новые объекты патронов в зависимости от заряда оружия
+        // Create new ammo display objects based on weapon charge
         for (int i = 0; i < maxCharge - shotsFired; i++)
         {
             Instantiate(ammoPrefab, ammoDisplay);

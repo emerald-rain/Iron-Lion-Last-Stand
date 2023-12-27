@@ -126513,7 +126513,7 @@ MonoBehaviour:
   enemyPrefabs:
   - {fileID: 3816676736364502233, guid: 32c5b3652ac71874fa240301e683b0f7, type: 3}
   - {fileID: 344445916090762764, guid: 12039f41b7fa8d14994e00233e5e851f, type: 3}
-  enemySpawnCount: 10
+  enemySpawnCount: 3
   spawnTimeout: 10
   timeoutStep: 0.2
   minTimeout: 5

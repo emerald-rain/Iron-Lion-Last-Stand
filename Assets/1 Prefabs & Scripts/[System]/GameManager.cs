@@ -30,7 +30,9 @@ public class GameManager : MonoBehaviour
     }
 
     public void GameOver()
-    { 
+    {
+        soundEffectsPlayer.StopMusic();
+
         // Hide ammo and play a loss video
         reloadSystem.gameObject.SetActive(false);
         vidPlayer.PlayVideo();

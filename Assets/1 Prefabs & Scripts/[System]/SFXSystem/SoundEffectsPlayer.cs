@@ -101,4 +101,18 @@ public class SoundEffectsPlayer : MonoBehaviour
         int randomIndex = Random.Range(0, audioClips.Length);
         return audioClips[randomIndex];
     }
+
+    public void StopMusic()
+    {
+        // Iterate through all audio sources in the array.
+        foreach (AudioSource source in audioSources)
+        {
+            // Check if the current audio source is currently playing.
+            if (source.isPlaying)
+            {
+                // If playing, stop the audio playback.
+                source.Stop();
+            }
+        }
+    }
 }

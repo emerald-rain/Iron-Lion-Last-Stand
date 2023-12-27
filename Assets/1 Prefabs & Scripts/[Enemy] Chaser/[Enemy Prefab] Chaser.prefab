@@ -109,6 +109,7 @@ MonoBehaviour:
   fixedHeight: 0.1
   healthBarOffset: {x: 0, y: 1, z: 0}
   maxHealth: 100
+  healthIncreasePerWave: 100
 --- !u!61 &8991782016567361134
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -349,7 +350,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   volume: 1
-  audioSources:
-  - {fileID: -3852038913694908251}
+  maxAudioSources: 1
   audioClips:
   - {fileID: 8300000, guid: b3e1ae5b89608d94a966d9f60faa86da, type: 3}

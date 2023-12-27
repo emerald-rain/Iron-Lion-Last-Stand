@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using TMPro;
 
 public class PlayerShooting : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class PlayerShooting : MonoBehaviour
     public Transform ammoDisplay;
     public GameObject ammoPrefab;
     public SoundEffectsPlayer soundEffectsPlayerReload;
+    public TMP_Text hintText;
 
     private float timer;
     private int shotsFired;
@@ -80,11 +82,17 @@ public class PlayerShooting : MonoBehaviour
     IEnumerator Reload()
     {
         isReloading = true;
+        RemoveHint();
         soundEffectsPlayerReload.PlayRandom();
         yield return new WaitForSeconds(reloadTime);
         shotsFired = 0;
         isReloading = false;
         UpdateAmmoDisplay();
+    }
+
+    public void RemoveHint()
+    {
+        hintText.gameObject.SetActive(false);
     }
 
     void UpdateAmmoDisplay()

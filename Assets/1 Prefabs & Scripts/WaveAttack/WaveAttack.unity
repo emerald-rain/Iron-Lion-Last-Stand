@@ -126518,7 +126518,7 @@ MonoBehaviour:
   timeoutStep: 0.2
   minTimeout: 5
   previousExtraHealth: 0
-  increaceExtraHealth: 20
+  increaceExtraHealth: 10
 --- !u!114 &1992137211
 MonoBehaviour:
   m_ObjectHideFlags: 0

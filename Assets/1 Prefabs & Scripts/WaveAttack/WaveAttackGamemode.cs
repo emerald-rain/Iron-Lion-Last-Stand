@@ -14,6 +14,9 @@ public class WaveAttackGamemode : MonoBehaviour
     [SerializeField] private float spawnTimeout;
     [SerializeField] private float timeoutStep;
     [SerializeField] private float minTimeout;
+    [SerializeField] private int previousExtraHealth;
+    [SerializeField] private int increaceExtraHealth;
+
 
     private Transform playerTransform;
     private float spawnDistance = 20f;
@@ -47,8 +50,25 @@ public class WaveAttackGamemode : MonoBehaviour
             Vector3 randomSpawnPosition = GetRandomNavMeshPosition();
 
             // Создание врага в выбранной позиции
-            Instantiate(randomEnemyPrefab, randomSpawnPosition, Quaternion.identity);
+            GameObject enemyInstance = Instantiate(randomEnemyPrefab, randomSpawnPosition, Quaternion.identity);
+
+            // Получение компонента здоровья для изменения максимального здоровья
+            ChaserHealth chaserHealth = enemyInstance.GetComponent<ChaserHealth>();
+            ShooterHealth shooterHealth = enemyInstance.GetComponent<ShooterHealth>();
+
+            if (chaserHealth != null)
+            {
+                // Увеличиваем максимальное здоровье каждого Chaser через 30 секунд
+                chaserHealth.maxHealth += previousExtraHealth; // Измените этот параметр по вашему усмотрению
+            }
+
+            if (shooterHealth != null)
+            {
+                // Увеличиваем максимальное здоровье каждого Shooter через 30 секунд
+                shooterHealth.maxHealth += previousExtraHealth; // Измените этот параметр по вашему усмотрению
+            }
         }
+        previousExtraHealth += increaceExtraHealth;
     }
 
     private Vector3 GetRandomNavMeshPosition()

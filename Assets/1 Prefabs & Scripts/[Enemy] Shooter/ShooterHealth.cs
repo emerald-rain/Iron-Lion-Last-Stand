@@ -6,7 +6,7 @@ public class ShooterHealth : MonoBehaviour
     [SerializeField] private float maxWidth = 0.8f;
     [SerializeField] private float fixedHeight = 0.1f;
     [SerializeField] private Vector3 healthBarOffset = new Vector3(0f, 1f, 0f);
-    [SerializeField] private int maxHealth = 100;
+    [SerializeField] public int maxHealth = 100;
 
     public HealthSystem healthSystem;
     private ScoreManager scoreManager;

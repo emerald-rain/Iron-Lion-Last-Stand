@@ -126517,8 +126517,8 @@ MonoBehaviour:
   spawnTimeout: 10
   timeoutStep: 0.2
   minTimeout: 5
-  previousExtraHealth: 0
-  increaceExtraHealth: 10
+  increaseChaserExtraHealth: 6
+  previousShooterExtraHealth: 4
 --- !u!114 &1992137211
 MonoBehaviour:
   m_ObjectHideFlags: 0

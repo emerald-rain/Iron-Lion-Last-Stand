@@ -14,9 +14,13 @@ public class WaveAttackGamemode : MonoBehaviour
     [SerializeField] private float spawnTimeout;
     [SerializeField] private float timeoutStep;
     [SerializeField] private float minTimeout;
-    [SerializeField] private int previousExtraHealth;
-    [SerializeField] private int increaceExtraHealth;
 
+    [Header("Increasing HP")]
+    [SerializeField] private int increaseChaserExtraHealth;
+    private int previousChaserExtraHealth;
+
+    [SerializeField] private int previousShooterExtraHealth;
+    private int increaseShooterExtraHealth;
 
     private Transform playerTransform;
     private float spawnDistance = 20f;
@@ -59,16 +63,17 @@ public class WaveAttackGamemode : MonoBehaviour
             if (chaserHealth != null)
             {
                 // Увеличиваем максимальное здоровье каждого Chaser через 30 секунд
-                chaserHealth.maxHealth += previousExtraHealth; // Измените этот параметр по вашему усмотрению
+                chaserHealth.maxHealth += previousChaserExtraHealth; // Измените этот параметр по вашему усмотрению
             }
 
             if (shooterHealth != null)
             {
                 // Увеличиваем максимальное здоровье каждого Shooter через 30 секунд
-                shooterHealth.maxHealth += previousExtraHealth; // Измените этот параметр по вашему усмотрению
+                shooterHealth.maxHealth += previousShooterExtraHealth; // Измените этот параметр по вашему усмотрению
             }
         }
-        previousExtraHealth += increaceExtraHealth;
+        previousChaserExtraHealth += increaseChaserExtraHealth;
+        previousShooterExtraHealth += increaseShooterExtraHealth;
     }
 
     private Vector3 GetRandomNavMeshPosition()
